@@ -6,6 +6,8 @@ public abstract class Person {
 	
 	public Person() {
 		super();
+		setName(null);
+		setPin(null);
 	}
 
 	public Person(String name, String pin) {
