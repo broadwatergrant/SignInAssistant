@@ -11,16 +11,12 @@ public class Log {
 	private final LogType type;
 	private final String message;
 	
-	private static boolean v, i, w, e, d;
-	private static ArrayList<Log> logList;
-	
-	public Log(String message) {
-		this(LogType.VERBOSE, message);
-	}
+	private static boolean v = true, i = true, w = true, e = true, d = true;
+	private static ArrayList<Log> logList = new ArrayList<Log>();
 	
 	public Log(LogType type, String message){
-		this.message = displayMessage(message);
 		this.type = type;
+		this.message = displayMessage(message);
 		
 		logList.add(this);
 	}
@@ -30,29 +26,29 @@ public class Log {
 		String className = element.getClassName();
 		String methodName = element.getMethodName();
 		int lineNumber = element.getLineNumber();
-		String debugInfo = className + "." + methodName + "() [" + lineNumber + "] :: \n\t"; 
+		String debugInfo = this.type + " - " + className + "." + methodName + "() [" + lineNumber + "] :: \n\t"; 
 		String result = debugInfo + message;
 		
 		switch(this.type){
 		case DEBUG:
 			if(d)
-				System.out.println(message);
+				System.out.println(result);
 			break;
 		case ERROR:
 			if(e)
-				System.out.println(message);
+				System.out.println(result);
 			break;
 		case INFO:
 			if(i)
-				System.out.println(message);
+				System.out.println(result);
 			break;
 		case VERBOSE:
 			if(v)
-				System.out.println(message);
+				System.out.println(result);
 			break;
 		case WARN:
 			if(w)
-				System.out.println(message);
+				System.out.println(result);
 			break;
 		default:
 			break;
@@ -65,8 +61,8 @@ public class Log {
 		return v;
 	}
 
-	public static void setV(boolean b) {
-		Log.v = b;
+	public static void setV(boolean v) {
+		Log.v = v;
 	}
 
 	public static boolean isI() {
