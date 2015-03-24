@@ -64,19 +64,23 @@ public class ExcelReader {
 		String result = null;
 		switch(cell.getCellType()){
 		case Cell.CELL_TYPE_BLANK:
-			
+			result = "";
 			break;
 		case Cell.CELL_TYPE_BOOLEAN:
 			result = cell.getBooleanCellValue() + "";
 			break;
 		case Cell.CELL_TYPE_ERROR:
-			result = cell.getErrorCellValue() + "";
+			result = "";
 			break;
 		case Cell.CELL_TYPE_FORMULA:
 			result = cell.getCellFormula();
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
-			 result = cell.getNumericCellValue() + "";
+			double d = cell.getNumericCellValue();
+			if(d % 1 == 0)
+				result = ((int)d) + "";
+			else
+				result = d + "";
 			break;
 		case Cell.CELL_TYPE_STRING:
 			result = cell.getStringCellValue();
