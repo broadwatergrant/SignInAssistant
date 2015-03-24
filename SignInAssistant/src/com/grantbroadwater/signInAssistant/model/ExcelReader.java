@@ -3,6 +3,8 @@ package com.grantbroadwater.signInAssistant.model;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,6 +12,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.grantbroadwater.util.Log;
 
 public class ExcelReader {
 
@@ -56,7 +60,10 @@ public class ExcelReader {
 			wb.close();
 			input.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			new Log(Log.LogType.ERROR, sw.toString());
 		}
 	}
 	
