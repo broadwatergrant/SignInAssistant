@@ -61,14 +61,15 @@ public class ExcelReader {
 		}
 	}
 	
-	private String readCell(Cell cell){
-		String result = null;
+	private Object readCell(Cell cell){
+		Object result = null;
+		
 		switch(cell.getCellType()){
 		case Cell.CELL_TYPE_BLANK:
 			result = "";
 			break;
 		case Cell.CELL_TYPE_BOOLEAN:
-			result = cell.getBooleanCellValue() + "";
+			result = new Boolean(cell.getBooleanCellValue());
 			break;
 		case Cell.CELL_TYPE_ERROR:
 			result = "";
@@ -79,9 +80,9 @@ public class ExcelReader {
 		case Cell.CELL_TYPE_NUMERIC:
 			double d = cell.getNumericCellValue();
 			if(d % 1 == 0)
-				result = ((int)d) + "";
+				result = new Integer((int)d);
 			else
-				result = d + "";
+				result = new Double(d);
 			break;
 		case Cell.CELL_TYPE_STRING:
 			result = cell.getStringCellValue();
@@ -89,6 +90,7 @@ public class ExcelReader {
 		default:
 			break;
 		}
+		
 		return result;
 	}
 	
