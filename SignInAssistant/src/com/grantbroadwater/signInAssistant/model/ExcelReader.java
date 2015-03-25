@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,11 +19,11 @@ import com.grantbroadwater.util.Log;
 public class ExcelReader {
 
 	private File excelFile;
-	private String[][] result;
+	private ArrayList<Object> result;
 	
 	public ExcelReader() {
 		excelFile = null;
-		result = null;
+		result = new ArrayList<Object>();
 	}
 
 	public File getExcelFile() {
@@ -39,22 +40,15 @@ public class ExcelReader {
 			Workbook wb = new XSSFWorkbook(input);
 			Sheet sheet = wb.getSheetAt(0);
 			
-			result = new String[sheet.getLastRowNum() + 1][sheet.getRow(0).getLastCellNum() + 1];
-			
 			Iterator<Row> rows = sheet.rowIterator();
-			int rcount = 0;
 			while(rows.hasNext()){
 				Row row = rows.next();
 				
 				Iterator<Cell> cells = row.cellIterator();
-				int ccount = 0;
 				while(cells.hasNext()){
 					Cell cell = cells.next();
-					String str = this.readCell(cell);
-					result[rcount][ccount] = str;
-					ccount++;
+					result.add(this.readCell(cell));
 				}
-				rcount++;
 			}
 			
 			wb.close();
@@ -98,11 +92,11 @@ public class ExcelReader {
 		return result;
 	}
 	
-	public String[][] getResult(){
+	public ArrayList<Object> getResult(){
 		return result;
 	}
 	
-	public String[][] readAndReturn(){
+	public ArrayList<Object> readAndReturn(){
 		read();
 		return getResult();
 	}
@@ -112,7 +106,7 @@ public class ExcelReader {
 		read();
 	}
 
-	public String[][] readAndReturn(File excelFile){
+	public ArrayList<Object> readAndReturn(File excelFile){
 		setExcelFile(excelFile);
 		return readAndReturn();
 	}
