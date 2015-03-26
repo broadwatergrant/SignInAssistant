@@ -88,8 +88,7 @@ public abstract class Person {
 
 	@Override
 	public String toString() {
-		return "Person [firstName=" + firstName + ", lastName=" + lastName
-				+ ", pin=" + pin + "]";
+		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", pin=" + pin + "]";
 	}
 
 	

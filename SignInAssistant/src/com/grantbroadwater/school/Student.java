@@ -68,6 +68,7 @@ public class Student extends Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + gradeLevel;
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((timeIn == null) ? 0 : timeIn.hashCode());
 		result = prime * result + ((timeOut == null) ? 0 : timeOut.hashCode());
@@ -83,6 +84,8 @@ public class Student extends Person {
 		if (!(obj instanceof Student))
 			return false;
 		Student other = (Student) obj;
+		if (gradeLevel != other.gradeLevel)
+			return false;
 		if (status != other.status)
 			return false;
 		if (timeIn == null) {
@@ -100,7 +103,7 @@ public class Student extends Person {
 
 	@Override
 	public String toString() {
-		return super.toString() + " Student [timeIn=" + timeIn + ", timeOut=" + timeOut + ", status=" + status + "]";
+		return "Student [gradeLevel=" + gradeLevel + ", timeIn=" + timeIn + ", timeOut=" + timeOut + ", status=" + status + "]";
 	}
 	
 	
