@@ -12,25 +12,25 @@ public class Student extends Person {
 		super();
 		this.setTimeIn(null);
 		this.setTimeOut(null);
-		this.setStatus(null);
+		this.setStatus(Status.OUT);
 	}
 
-	public Student(String name, String pin) {
-		super(name, pin);
+	public Student(String firstName, String lastName, String pin) {
+		super(firstName, lastName, pin);
 		this.setTimeIn(null);
 		this.setTimeOut(null);
-		this.setStatus(null);
+		this.setStatus(Status.OUT);
 	}
 
-	public Student(String name, String pin, Status status) {
-		super(name, pin);
+	public Student(String firstName, String lastName, String pin, Status status) {
+		super(firstName, lastName, pin);
 		this.setTimeIn(null);
 		this.setTimeOut(null);
-		this.setStatus(null);
+		this.setStatus(status);
 	}
 	
-	public Student(String name, String pin, GregorianCalendar timeIn, GregorianCalendar timeOut, Status status) {
-		super(name, pin);
+	public Student(String firstName, String lastName, String pin, GregorianCalendar timeIn, GregorianCalendar timeOut, Status status) {
+		super(firstName, lastName, pin);
 		this.setTimeIn(timeIn);
 		this.setTimeOut(timeOut);
 		this.setStatus(status);
