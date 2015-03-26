@@ -106,8 +106,7 @@ public class StudentExcelReader extends ExcelReader {
 				throw new IllegalArgumentException("Format " + i + " (" + f + ") does not contain any recognizable keywords");
 		}
 		
-		return new Student(first, last, pin, grade);
+		return new Student(capitalize(first), capitalize(last), pin, grade);
 	}
 	
-
 }

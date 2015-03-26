@@ -144,4 +144,19 @@ public class ExcelReader {
 		setExcelFile(excelFile);
 		return readAndReturn();
 	}
+	
+	public void read(File excelFile, int sheetIndex){
+		setData(excelFile, sheetIndex);
+		read();
+	}
+	
+	public ArrayList<Object> readAndReturn(File excelFile, int sheetIndex){
+		setData(excelFile, sheetIndex);
+		return readAndReturn();
+	}
+	
+	public String capitalize(String str){
+		return str.substring(0, 1) + str.substring(1).toLowerCase();
+	}
+	
 }
