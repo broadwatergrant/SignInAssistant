@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 
 public class Student extends Person {
 
+	private int gradeLevel;
 	private GregorianCalendar timeIn, timeOut;
 	private Status status;
 	
@@ -57,6 +58,14 @@ public class Student extends Person {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public int getGradeLevel() {
+		return gradeLevel;
+	}
+
+	public void setGradeLevel(int gradeLevel) {
+		this.gradeLevel = gradeLevel;
 	}
 
 	@Override
