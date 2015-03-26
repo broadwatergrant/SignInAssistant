@@ -45,7 +45,7 @@ public class StudentExcelReader extends ExcelReader {
 	public void read(){
 		try {
 			InputStream input = new FileInputStream(getExcelFile());
-			Workbook wb = new XSSFWorkbook(input);
+			Workbook wb = new XSSFWorkbook(input); // TODO: Determine xssf or hssf
 			Sheet sheet = wb.getSheetAt(getSheetIndex());
 			ArrayList<String> format = new ArrayList<String>();
 			ArrayList<Object> contents = new ArrayList<Object>();
@@ -102,7 +102,7 @@ public class StudentExcelReader extends ExcelReader {
 				first = (String)contents[i];
 			else if(f.indexOf("last") != -1)
 				last = (String)contents[i];
-			else if(f.indexOf("pin") != -1)
+			else if(f.indexOf("pin") != -1 || f.indexOf("password") != -1)
 				pin = contents[i] + "";
 			else if(f.indexOf("grade") != -1)
 				grade = (int)contents[i];
