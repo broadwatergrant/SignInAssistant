@@ -10,6 +10,7 @@ public class Student extends Person {
 	
 	public Student() {
 		super();
+		this.setGradeLevel(0);
 		this.setTimeIn(null);
 		this.setTimeOut(null);
 		this.setStatus(Status.OUT);
@@ -17,23 +18,18 @@ public class Student extends Person {
 
 	public Student(String firstName, String lastName, String pin) {
 		super(firstName, lastName, pin);
+		this.setGradeLevel(0);
 		this.setTimeIn(null);
 		this.setTimeOut(null);
 		this.setStatus(Status.OUT);
 	}
-
-	public Student(String firstName, String lastName, String pin, Status status) {
+	
+	public Student(String firstName, String lastName, String pin, int gradeLevel) {
 		super(firstName, lastName, pin);
+		this.setGradeLevel(gradeLevel);
 		this.setTimeIn(null);
 		this.setTimeOut(null);
-		this.setStatus(status);
-	}
-	
-	public Student(String firstName, String lastName, String pin, GregorianCalendar timeIn, GregorianCalendar timeOut, Status status) {
-		super(firstName, lastName, pin);
-		this.setTimeIn(timeIn);
-		this.setTimeOut(timeOut);
-		this.setStatus(status);
+		this.setStatus(Status.OUT);
 	}
 
 	public GregorianCalendar getTimeIn() {
