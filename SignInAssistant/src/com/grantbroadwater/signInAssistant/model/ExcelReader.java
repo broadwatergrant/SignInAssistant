@@ -93,7 +93,7 @@ public class ExcelReader {
 		}
 	}
 	
-	private Object readCell(Cell cell){
+	protected Object readCell(Cell cell){
 		Object result = null;
 		
 		switch(cell.getCellType()){
