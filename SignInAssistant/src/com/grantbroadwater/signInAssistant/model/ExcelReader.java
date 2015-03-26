@@ -156,7 +156,7 @@ public class ExcelReader {
 	}
 	
 	public String capitalize(String str){
-		return str.substring(0, 1) + str.substring(1).toLowerCase();
+		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
 	}
 	
 }
