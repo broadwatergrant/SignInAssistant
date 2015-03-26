@@ -2,26 +2,37 @@ package com.grantbroadwater.school;
 
 public abstract class Person {
 
-	private String name, pin;
+	private String firstName, lastName, pin;
 	
 	public Person() {
 		super();
-		setName(null);
+		setFirstName(null);
+		setLastName(null);
 		setPin(null);
 	}
 
-	public Person(String name, String pin) {
+	public Person(String firstName, String lastName, String pin) {
 		super();
-		this.setName(name);
+		setFirstName(firstName);
+		setLastName(lastName);
 		this.setPin(pin);
 	}
 
-	public String getName() {
-		return name;
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPin() {
@@ -36,7 +47,10 @@ public abstract class Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((pin == null) ? 0 : pin.hashCode());
 		return result;
 	}
@@ -50,10 +64,15 @@ public abstract class Person {
 		if (!(obj instanceof Person))
 			return false;
 		Person other = (Person) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (pin == null) {
 			if (other.pin != null)
@@ -65,7 +84,10 @@ public abstract class Person {
 
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", pin=" + pin + "]";
+		return "Person [firstName=" + firstName + ", lastName=" + lastName
+				+ ", pin=" + pin + "]";
 	}
+
+	
 
 }
