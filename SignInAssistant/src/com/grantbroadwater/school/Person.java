@@ -24,7 +24,7 @@ public abstract class Person {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = capitalize(firstName);
 	}
 
 	public String getLastName() {
@@ -32,7 +32,7 @@ public abstract class Person {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = capitalize(lastName);
 	}
 
 	public String getPin() {
@@ -43,6 +43,10 @@ public abstract class Person {
 		this.pin = pin;
 	}
 
+	public String capitalize(String str){
+		return str.substring(0, 1) + str.substring(1).toLowerCase();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
