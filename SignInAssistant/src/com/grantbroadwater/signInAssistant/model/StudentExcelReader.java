@@ -53,6 +53,7 @@ public class StudentExcelReader extends ExcelReader {
 			Iterator<Row> rows = sheet.rowIterator();
 			while(rows.hasNext()){
 				Row row = rows.next();
+				contents.clear();
 				
 				Iterator<Cell> cells = row.cellIterator();
 				while(cells.hasNext()){
@@ -65,7 +66,10 @@ public class StudentExcelReader extends ExcelReader {
 					}
 					
 				}
-				studentList.add(createStudentFromData(format.toArray(new String[format.size()]), contents.toArray()));
+				
+				if(row.getRowNum() != 0)
+					studentList.add(createStudentFromData(format.toArray(new String[format.size()]), contents.toArray()));
+			
 			}
 			
 			wb.close();
@@ -86,7 +90,7 @@ public class StudentExcelReader extends ExcelReader {
 	
 	private Student createStudentFromData(String[] format, Object[] contents){
 		if(format.length != contents.length)
-			throw new IllegalArgumentException("Format array and Content array must have the same number of elements");
+			throw new IllegalArgumentException("Format array and Content array must have the same number of elements " + format.length + " != " + contents.length);
 		
 		String first = null, last = null, pin = null;
 		int grade = 0;
@@ -99,7 +103,7 @@ public class StudentExcelReader extends ExcelReader {
 			else if(f.indexOf("last") != -1)
 				last = (String)contents[i];
 			else if(f.indexOf("pin") != -1)
-				pin = (String)contents[i];
+				pin = contents[i] + "";
 			else if(f.indexOf("grade") != -1)
 				grade = (int)contents[i];
 			else
