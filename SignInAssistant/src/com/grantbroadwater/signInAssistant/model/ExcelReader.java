@@ -20,10 +20,29 @@ public class ExcelReader {
 
 	private File excelFile;
 	private ArrayList<Object> result;
+	private int sheetIndex;
 	
 	public ExcelReader() {
-		excelFile = null;
+		super();
+		this.setExcelFile(null);
+		this.setSheetIndex(0);;
 		result = new ArrayList<Object>();
+	}
+	
+	public ExcelReader(File excelFile) {
+		this();
+		this.setExcelFile(excelFile);
+	}
+	
+	public ExcelReader(int sheetIndex) {
+		this();
+		this.setSheetIndex(sheetIndex);
+	}
+
+	public ExcelReader(File excelFile, int sheetIndex) {
+		this();
+		this.setExcelFile(excelFile);
+		this.setSheetIndex(sheetIndex);
 	}
 
 	public File getExcelFile() {
@@ -34,11 +53,24 @@ public class ExcelReader {
 		this.excelFile = excelFile;
 	}
 	
+	public int getSheetIndex() {
+		return sheetIndex;
+	}
+
+	public void setSheetIndex(int sheetIndex) {
+		this.sheetIndex = sheetIndex;
+	}
+	
+	public void setData(File excelFile, int sheetIndex){
+		setExcelFile(excelFile);
+		setSheetIndex(sheetIndex);
+	}
+	
 	public void read(){
 		try {
 			InputStream input = new FileInputStream(excelFile);
 			Workbook wb = new XSSFWorkbook(input);
-			Sheet sheet = wb.getSheetAt(0);
+			Sheet sheet = wb.getSheetAt(sheetIndex);
 			
 			Iterator<Row> rows = sheet.rowIterator();
 			while(rows.hasNext()){

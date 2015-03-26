@@ -36,8 +36,8 @@ public class ExcelReaderTest {
 
 		assertEquals("Grant", result.get(0));
 		assertEquals(true, result.get(1));
-		assertEquals(new Integer(12345), result.get(2));
-		assertEquals(new Double(12345.2), result.get(3));
+		assertEquals(12345, result.get(2));
+		assertEquals(12345.2, result.get(3));
 		System.out.println(result.get(4));
 	}
 
