@@ -5,7 +5,8 @@ import java.util.Collection;
 
 public class BellSchedule {
 
-	ArrayList<ClassPeriod> schedule;
+	private String Name;
+	private ArrayList<ClassPeriod> schedule;
 
 	public BellSchedule() {
 		super();
@@ -24,6 +25,14 @@ public class BellSchedule {
 	public void setSchedule(Collection<? extends ClassPeriod> c) {
 		schedule.clear();
 		this.addAll(c);
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
 	}
 
 	public int size() {
@@ -74,6 +83,7 @@ public class BellSchedule {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
 		result = prime * result
 				+ ((schedule == null) ? 0 : schedule.hashCode());
 		return result;
@@ -88,6 +98,11 @@ public class BellSchedule {
 		if (!(obj instanceof BellSchedule))
 			return false;
 		BellSchedule other = (BellSchedule) obj;
+		if (Name == null) {
+			if (other.Name != null)
+				return false;
+		} else if (!Name.equals(other.Name))
+			return false;
 		if (schedule == null) {
 			if (other.schedule != null)
 				return false;
@@ -98,7 +113,7 @@ public class BellSchedule {
 
 	@Override
 	public String toString() {
-		return "BellSchedule [schedule=" + schedule + "]";
+		return "BellSchedule [Name=" + Name + ", schedule=" + schedule + "]";
 	}
 	
 	
