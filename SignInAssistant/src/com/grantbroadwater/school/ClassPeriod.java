@@ -1,5 +1,6 @@
 package com.grantbroadwater.school;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ClassPeriod {
@@ -70,7 +71,7 @@ public class ClassPeriod {
 		if (start == null) {
 			if (other.start != null)
 				return false;
-		} else if (!start.equals(other.start))
+		} else if (!this.timeEquals(other))
 			return false;
 		if (stop == null) {
 			if (other.stop != null)
@@ -78,6 +79,14 @@ public class ClassPeriod {
 		} else if (!stop.equals(other.stop))
 			return false;
 		return true;
+	}
+	
+	private boolean timeEquals(ClassPeriod other){
+		boolean b1 = this.start.get(Calendar.HOUR_OF_DAY) == other.start.get(Calendar.HOUR_OF_DAY);
+		boolean b2 = this.start.get(Calendar.MINUTE) == other.start.get(Calendar.MINUTE);
+		boolean b3 = this.stop.get(Calendar.HOUR_OF_DAY) == other.stop.get(Calendar.HOUR_OF_DAY);
+		boolean b4 = this.stop.get(Calendar.MINUTE) == other.stop.get(Calendar.MINUTE);
+		return b1 && b2 && b3 && b4;
 	}
 
 	@Override
