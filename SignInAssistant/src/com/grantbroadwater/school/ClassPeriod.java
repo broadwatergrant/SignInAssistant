@@ -61,24 +61,22 @@ public class ClassPeriod {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		ClassPeriod other = null;
+		if(obj instanceof ClassPeriod)
+			other = (ClassPeriod)obj;
+		else
 			return false;
-		if (!(obj instanceof ClassPeriod))
+		
+		if(XOR(this.start == null, other.start == null))
 			return false;
-		ClassPeriod other = (ClassPeriod) obj;
-		if (start == null) {
-			if (other.start != null)
-				return false;
-		} else if (!this.timeEquals(other))
+		else if(XOR(this.stop == null, other.stop == null))
 			return false;
-		if (stop == null) {
-			if (other.stop != null)
-				return false;
-		} else if (!stop.equals(other.stop))
-			return false;
-		return true;
+		else
+			return timeEquals(other);
+	}
+	
+	public static boolean XOR(boolean x, boolean y) {
+	    return ( ( x || y ) && ! ( x && y ) );
 	}
 	
 	private boolean timeEquals(ClassPeriod other){
@@ -91,7 +89,8 @@ public class ClassPeriod {
 
 	@Override
 	public String toString() {
-		return "ClassPeriod [start=" + start + ", stop=" + stop + "]";
+		return "ClassPeriod [start=" + start.get(Calendar.HOUR_OF_DAY) + ":" + start.get(Calendar.MINUTE) 
+				+ ", stop=" + stop.get(Calendar.HOUR_OF_DAY) + ":" + stop.get(Calendar.MINUTE) + "]";
 	}
 
 }
