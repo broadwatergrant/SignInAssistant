@@ -60,7 +60,11 @@ public class ScheduleExcelReader extends ExcelReader {
 				Iterator<Cell> cells = row.cellIterator();
 				while(cells.hasNext()){
 					Cell cell = cells.next();
-					if(row.getLastCellNum() == 0){ // Only one cell in row (Title of following schedule)
+					
+					if(cell.getCellType() == Cell.CELL_TYPE_BLANK)
+						continue;
+					
+					if(row.getCell(0).getCellType() == (Cell.CELL_TYPE_STRING)){ // String type therfore name
 						if(row.getRowNum() == 0){ // First row (Current Schedule is empty)
 							schedule = new BellSchedule(capitalizePhrase(cell.getStringCellValue()));
 						}else{ // Not first row (Current schedule should not be empty)
@@ -70,7 +74,8 @@ public class ScheduleExcelReader extends ExcelReader {
 					}else{ // Multiple cells in row (Class period of current schedule)
 						if(cell.getColumnIndex() == 0){
 							GregorianCalendar date = new GregorianCalendar();
-							date.setTime(cell.getDateCellValue());
+							java.util.Date cellValue = cell.getDateCellValue();
+							date.setTime(cellValue);
 							period.setStart(date);
 						}else if(cell.getColumnIndex() == 1){
 							GregorianCalendar date = new GregorianCalendar();
@@ -83,6 +88,7 @@ public class ScheduleExcelReader extends ExcelReader {
 					}	
 				}
 			}
+			scheduleList.add(schedule);
 			
 			wb.close();
 			input.close();
