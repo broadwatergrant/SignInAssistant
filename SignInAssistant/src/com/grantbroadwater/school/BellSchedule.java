@@ -10,12 +10,23 @@ public class BellSchedule {
 
 	public BellSchedule() {
 		super();
+		this.setName("Unnamed Schedule");
 		this.setSchedule(new ArrayList<ClassPeriod>());
+	}
+	
+	public BellSchedule(String name){
+		this();
+		this.setName(name);
 	}
 	
 	public BellSchedule(Collection<? extends ClassPeriod> c){
 		this();
-		this.addAll(c);
+		this.setSchedule(c);
+	}
+	
+	public BellSchedule(String name, Collection<? extends ClassPeriod> c){
+		this.setName(name);
+		this.setSchedule(c);
 	}
 	
 	public ArrayList<ClassPeriod> getSchedule() {
