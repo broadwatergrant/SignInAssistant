@@ -19,8 +19,7 @@ public class Administrators {
 		return administratorList;
 	}
 
-	public void setAdministratorList(
-			HashMap<String, Administrator> administratorList) {
+	public void setAdministratorList(HashMap<String, Administrator> administratorList) {
 		this.administratorList = administratorList;
 	}
 
