@@ -12,6 +12,16 @@ public class Administrators {
 		super();
 		this.setAdministratorList(new HashMap<String, Administrator>());
 	}
+	
+	public Administrators(Administrator[] administrators){
+		this();
+		this.setAdministrators(administrators);
+	}
+	
+	public Administrators(HashMap<String, Administrator> administratorList){
+		this();
+		this.setAdministratorList(administratorList);
+	}
 
 	/* ----- Accessors / Mutators ----- */
 	
@@ -24,6 +34,13 @@ public class Administrators {
 	}
 
 	/* ----- Specific Behaviors ----- */
+	
+	public void setAdministrators(Administrator[] administrators){
+		administratorList.clear();
+		for(Administrator a : administrators)
+			administratorList.put(a.getPin(), a);
+	}
+	
 	public Administrator add(Administrator a){
 		return administratorList.put(a.getPin(), a);
 	}
