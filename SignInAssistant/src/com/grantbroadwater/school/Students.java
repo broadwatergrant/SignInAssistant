@@ -13,6 +13,16 @@ public class Students {
 		this.setStudentList(new HashMap<String, Student>());
 	}
 	
+	public Students(Student[] students){
+		this();
+		this.setStudents(students);
+	}
+	
+	public Students(HashMap<String, Student> students){
+		this();
+		this.setStudentList(students);
+	}
+	
 	/* ----- Accessors / Mutators ----- */
 	
 	public HashMap<String, Student> getStudentList() {
@@ -24,6 +34,13 @@ public class Students {
 	}
 
 	/* ----- Specific Behaviors ----- */
+	
+	public void setStudents(Student[] students){
+		studentList.clear();
+		for(Student s : students)
+			studentList.put(s.getPin(), s);
+	}
+	
 	public Student add(Student s){
 		return studentList.put(s.getPin(), s);
 	}
