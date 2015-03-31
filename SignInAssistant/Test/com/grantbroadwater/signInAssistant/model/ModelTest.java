@@ -47,7 +47,7 @@ public class ModelTest {
 	public void testStudentMatchingCriteria(){
 		model = new Model();
 		model.loadData();
-		Student[] students = model.getStudentsMatchinCriteria("", "Sarah", "");
+		Student[] students = model.getStudentsMatchingCriteria("", "Sarah", "");
 		for(Student s : students){
 			System.out.println(s);
 		}

@@ -218,7 +218,7 @@ public class Model {
 	
 	/* ---------- Data needed for views ---------- */
 	
-	public Student[] getStudentsMatchinCriteria(String pin, String firstName, String lastName){
+	public Student[] getStudentsMatchingCriteria(String pin, String firstName, String lastName){
 		if(pin == null)
 			pin = "";
 		if(firstName == null)
@@ -257,6 +257,49 @@ public class Model {
 			return list.toArray(new Student[list.size()]);
 		}else{
 			return new Student[0];
+		}
+	}
+	
+	public Administrator[] getAdministratorsMatchingCriteria(String pin, String firstName, String lastName){
+		if(pin == null)
+			pin = "";
+		if(firstName == null)
+			firstName = "";
+		if(lastName == null)
+			lastName = "";
+		
+		if(!pin.equals("") && administration.containsKey(pin)){
+			Administrator[] result = new Administrator[1];
+			result[0] = administration.get(pin);
+			return result;
+		}
+		
+		if(firstName.equals("")){
+			ArrayList<Administrator> list = new ArrayList<Administrator>();
+			for(String  k: administration.keySet()){
+				Administrator s = administration.get(k);
+				if(s.getLastName().indexOf(lastName) != -1)
+					list.add(s);
+			}
+			return list.toArray(new Administrator[list.size()]);
+		}else if(lastName.equals("")){
+			ArrayList<Administrator> list = new ArrayList<Administrator>();
+			for(String  k: administration.keySet()){
+				Administrator s = administration.get(k);
+				if(s.getFirstName().indexOf(firstName) != -1)
+					list.add(s);
+			}
+			return list.toArray(new Administrator[list.size()]);
+		}else if(!firstName.equals("") && !lastName.equals("")){
+			ArrayList<Administrator> list = new ArrayList<Administrator>();
+			for(String  k: administration.keySet()){
+				Administrator s = administration.get(k);
+				if(s.getLastName().indexOf(lastName) != -1 && s.getFirstName().indexOf(firstName) != -1)
+					list.add(s);
+			}
+			return list.toArray(new Administrator[list.size()]);
+		}else{
+			return new Administrator[0];
 		}
 	}
 	
