@@ -35,6 +35,15 @@ public abstract class Person {
 		this.lastName = capitalize(lastName);
 	}
 
+	public String getName(){
+		return this.getFirstName() + " " + this.getLastName();
+	}
+	
+	public void setName(String firstName, String lastName){
+		setFirstName(firstName);
+		setLastName(lastName);
+	}
+	
 	public String getPin() {
 		return pin;
 	}
