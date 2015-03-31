@@ -100,6 +100,19 @@ public class Student extends Person {
 			return false;
 		return true;
 	}
+	
+	public boolean essentialyEquals(Object obj){
+		Student s = null;
+		if(obj instanceof Student)
+			s = (Student)obj;
+		else
+			return false;
+		
+		if(!super.equals(obj))
+			return false;
+		
+		return this.getGradeLevel() == s.getGradeLevel();
+	}
 
 	@Override
 	public String toString() {
