@@ -89,10 +89,25 @@ public class Model {
 		}
 	}
 	
-	private File getExcelFileLocationFromUser(){
+	protected File getExcelFileLocationFromUser(){
 		JFileChooser fileChooser = new JFileChooser();
-		// TODO: Implement
-		return null;
+		fileChooser.addChoosableFileFilter(new ExcelFileFilter());
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		
+		File result = null;
+		
+		do{
+			int returnValue = fileChooser.showDialog(null, "Select Excel File");
+				
+			if(returnValue == JFileChooser.APPROVE_OPTION){
+				result = fileChooser.getSelectedFile();
+			}else{
+				result = null;
+			}
+			
+		}while(result == null || !result.exists());
+		
+		return result;
 	}
 	
 	public Students getStudentBody(){

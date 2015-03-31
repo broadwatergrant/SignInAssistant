@@ -2,6 +2,8 @@ package com.grantbroadwater.signInAssistant.model;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import org.junit.Test;
 
 public class ModelTest {
@@ -9,7 +11,8 @@ public class ModelTest {
 	@Test
 	public void test() {
 		Model model = new Model();
-		model.loadReferenceData();
+		File f = model.getExcelFileLocationFromUser();
+		System.out.println(f.getAbsolutePath());
 	}
 
 }
