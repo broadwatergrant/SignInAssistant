@@ -24,7 +24,8 @@ public class Model {
 	private Students studentBody;
 	private Administrators administration;
 	private BellSchedule[] schedules;
-
+	private SignInSheet signInSheet;
+	
 	private File excelFile, excelFileLocation;
 	private ExcelReader reader;
 
@@ -216,8 +217,12 @@ public class Model {
 		return schedules;
 	}
 	
-	/* ---------- Data needed for views ---------- */
+	public SignInSheet getSignInSheet() {
+		return signInSheet;
+	}
 	
+	/* ---------- Data needed for views ---------- */
+
 	public Student[] getStudentsMatchingCriteria(String pin, String firstName, String lastName){
 		if(pin == null)
 			pin = "";
