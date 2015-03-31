@@ -3,36 +3,26 @@ package com.grantbroadwater.signInAssistant.model;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.junit.Test;
 
+import com.grantbroadwater.school.ClassPeriod;
+
 public class ModelTest {
 
 	@Test
 	public void test() {
 		Model model = new Model();
+
+		model.loadData();
 		
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		File f = model.getExcelFileLocationFromUser();
-		System.out.println(f.getAbsolutePath());
+		assertEquals("Chris", model.getStudentBody().get("20202").getFirstName());
+		assertEquals("Grant", model.getAdministration().get("10101").getFirstName());
+		System.out.println(model.getSchedules()[0]);
 	}
 
 }

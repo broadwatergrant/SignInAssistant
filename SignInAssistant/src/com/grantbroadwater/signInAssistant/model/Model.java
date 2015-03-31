@@ -3,16 +3,18 @@ package com.grantbroadwater.signInAssistant.model;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
+import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.Administrators;
 import com.grantbroadwater.school.BellSchedule;
+import com.grantbroadwater.school.Student;
 import com.grantbroadwater.school.Students;
 import com.grantbroadwater.util.Log;
 
@@ -60,7 +62,17 @@ public class Model {
 	}
 	
 	public void loadApplicationData(){
-		
+		reader = new StudentExcelReader();
+		ArrayList<Object> loadedStudents = reader.readAndReturn(excelFile, 0);
+		studentBody.setStudents(loadedStudents.toArray(new Student[loadedStudents.size()]));
+	
+		reader = new AdminExcelReader();
+		ArrayList<Object> loadedAdmin = reader.readAndReturn(excelFile, 1);
+		administration.setAdministrators(loadedAdmin.toArray(new Administrator[loadedAdmin.size()]));
+	
+		reader = new ScheduleExcelReader();
+		ArrayList<Object> loadedSchedules = reader.readAndReturn(excelFile, 2);
+		schedules = loadedSchedules.toArray(new BellSchedule[loadedSchedules.size()]);
 	}
 	
 	private String readFile(File f){
@@ -89,7 +101,7 @@ public class Model {
 		}
 	}
 	
-	protected File getExcelFileLocationFromUser(){
+	private File getExcelFileLocationFromUser(){
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.addChoosableFileFilter(new ExcelFileFilter());
 		fileChooser.setAcceptAllFileFilterUsed(false);
@@ -110,7 +122,27 @@ public class Model {
 			
 		}while(result == null || !result.exists());
 		
+		save(excelFileLocation, result.getAbsolutePath());
 		return result;
+	}
+	
+	private void save(File f, String s){
+		try {
+			FileOutputStream output = new FileOutputStream(f);
+			
+			for(char c : s.toCharArray())
+				output.write((byte)c);
+			
+			output.close();
+		} catch (FileNotFoundException e) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			new Log(Log.LogType.ERROR, sw.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Students getStudentBody(){
@@ -124,9 +156,4 @@ public class Model {
 	public BellSchedule[] getSchedules() {
 		return schedules;
 	}
-
-	public ExcelReader getReader() {
-		return reader;
-	}
-
 }
