@@ -64,8 +64,7 @@ public class Model {
 	}
 
 	public void loadApplicationData() {
-		// TODO: Catch exceptions
-
+		// Read students
 		reader = new StudentExcelReader();
 		ArrayList<Object> loadedStudents = reader.readAndReturn(excelFile, 0);
 		for (Object o : loadedStudents) {
@@ -75,7 +74,8 @@ public class Model {
 			if(s != null)
 				studentBody.put(s.getPin(), s);
 		}
-
+		
+		// Read Administrators
 		reader = new AdminExcelReader();
 		ArrayList<Object> loadedAdmin = reader.readAndReturn(excelFile, 1);
 		for (Object o : loadedAdmin) {
@@ -87,6 +87,7 @@ public class Model {
 				administration.put(a.getPin(), a);
 		}
 
+		// Read schedules
 		reader = new ScheduleExcelReader();
 		ArrayList<Object> loadedSchedules = reader.readAndReturn(excelFile, 2);
 		schedules = loadedSchedules.toArray(new BellSchedule[loadedSchedules
@@ -201,6 +202,8 @@ public class Model {
 		return null;
 	}
 
+	/* ---------- Accessors ---------- */
+	
 	public Students getStudentBody() {
 		return this.studentBody;
 	}
@@ -212,4 +215,49 @@ public class Model {
 	public BellSchedule[] getSchedules() {
 		return schedules;
 	}
+	
+	/* ---------- Data needed for views ---------- */
+	
+	public Student[] getStudentsMatchinCriteria(String pin, String firstName, String lastName){
+		if(pin == null)
+			pin = "";
+		if(firstName == null)
+			firstName = "";
+		if(lastName == null)
+			lastName = "";
+		
+		if(!pin.equals("") && studentBody.containsKey(pin)){
+			Student[] result = new Student[1];
+			result[0] = studentBody.get(pin);
+			return result;
+		}
+		if(firstName.equals("")){
+			ArrayList<Student> list = new ArrayList<Student>();
+			for(String  k: studentBody.keySet()){
+				Student s = studentBody.get(k);
+				if(s.getLastName().indexOf(lastName) != -1)
+					list.add(s);
+			}
+			return list.toArray(new Student[list.size()]);
+		}else if(lastName.equals("")){
+			ArrayList<Student> list = new ArrayList<Student>();
+			for(String  k: studentBody.keySet()){
+				Student s = studentBody.get(k);
+				if(s.getFirstName().indexOf(firstName) != -1)
+					list.add(s);
+			}
+			return list.toArray(new Student[list.size()]);
+		}else if(!firstName.equals("") && !lastName.equals("")){
+			ArrayList<Student> list = new ArrayList<Student>();
+			for(String  k: studentBody.keySet()){
+				Student s = studentBody.get(k);
+				if(s.getLastName().indexOf(lastName) != -1 && s.getFirstName().indexOf(firstName) != -1)
+					list.add(s);
+			}
+			return list.toArray(new Student[list.size()]);
+		}else{
+			return new Student[0];
+		}
+	}
+	
 }
