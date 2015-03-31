@@ -68,20 +68,23 @@ public class Model {
 
 		reader = new StudentExcelReader();
 		ArrayList<Object> loadedStudents = reader.readAndReturn(excelFile, 0);
-		for(Object o : loadedStudents){
-			Student s = (Student)o;
-			if(studentBody.containsKey(s.getPin()))
+		for (Object o : loadedStudents) {
+			Student s = (Student) o;
+			if (studentBody.containsKey(s.getPin()))
 				s = determineWhichStudentToSave(s, studentBody.get(s.getPin()));
-			studentBody.put(s.getPin(), s);
+			if(s != null)
+				studentBody.put(s.getPin(), s);
 		}
 
 		reader = new AdminExcelReader();
 		ArrayList<Object> loadedAdmin = reader.readAndReturn(excelFile, 1);
 		for (Object o : loadedAdmin) {
-			Administrator a = (Administrator)o;
-			if(administration.containsKey(a.getPin()))
-				a = determineWhichAdministratorToSave(a, administration.get(a.getPin()));
-			administration.put(a.getPin(), a);
+			Administrator a = (Administrator) o;
+			if (administration.containsKey(a.getPin()))
+				a = determineWhichAdministratorToSave(a,
+						administration.get(a.getPin()));
+			if(a != null)
+				administration.put(a.getPin(), a);
 		}
 
 		reader = new ScheduleExcelReader();
@@ -141,7 +144,7 @@ public class Model {
 		save(excelFileLocation, result.getAbsolutePath());
 		return result;
 	}
-	
+
 	private void save(File f, String s) {
 		try {
 			FileOutputStream output = new FileOutputStream(f);
@@ -163,28 +166,38 @@ public class Model {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// TODO: Make private
-	protected Student determineWhichStudentToSave(Student s1, Student s2){
-		if(s1.essentialyEquals(s2))
+	protected Student determineWhichStudentToSave(Student s1, Student s2) {
+		if (s1.essentialyEquals(s2))
 			return s1; // Both are same person, just duplicate entry
-		Object[] options = {s1.getName(), s2.getName()};
-		int result = JOptionPane.showOptionDialog(null,
-				s1.getName() + " and " + s2.getName() + "both have the same pin.\n" +
-				"Please select who you would like to add", 
-				"Student Confilct", 
-				JOptionPane.YES_NO_OPTION, 
-				JOptionPane.QUESTION_MESSAGE,
-				null, 
-				options,
-				options[0]);
-		if(result == JOptionPane.YES_OPTION)
+		Object[] options = { s1.getName(), s2.getName() };
+		int result = JOptionPane.showOptionDialog(null, s1.getName() + " and "
+				+ s2.getName() + " both have the same pin.\n"
+				+ "Please select the correct student to add",
+				"Student Confilct", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (result == JOptionPane.YES_OPTION)
 			return s1;
-		else if(result == JOptionPane.NO_OPTION);
+		else if (result == JOptionPane.NO_OPTION)
 			return s2;
+		return null;
 	}
-	
-	private Administrator determineWhichAdministratorToSave(Administrator a1, Administrator a2){
+
+	protected Administrator determineWhichAdministratorToSave(Administrator a1,
+			Administrator a2) {
+		if (a1.equals(a2))
+			return a1; // Both are same, irrelevant which to add
+		Object[] options = { a1.getName(), a2.getName() };
+		int result = JOptionPane.showOptionDialog(null, a1.getName() + " and "
+				+ a2.getName() + " both have the same pin.\n"
+				+ "Please select the correct administrator to add.",
+				"Administrator Conflict", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (result == JOptionPane.YES_OPTION)
+			return a1;
+		else if (result == JOptionPane.NO_OPTION)
+			return a2;
 		return null;
 	}
 
