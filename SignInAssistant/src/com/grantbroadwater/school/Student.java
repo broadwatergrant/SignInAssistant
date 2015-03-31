@@ -7,7 +7,7 @@ public class Student extends Person {
 	private int gradeLevel;
 	private GregorianCalendar timeIn, timeOut;
 	private Status status;
-	
+
 	public Student() {
 		super();
 		this.setGradeLevel(0);
@@ -23,7 +23,7 @@ public class Student extends Person {
 		this.setTimeOut(null);
 		this.setStatus(Status.OUT);
 	}
-	
+
 	public Student(String firstName, String lastName, String pin, int gradeLevel) {
 		super(firstName, lastName, pin);
 		this.setGradeLevel(gradeLevel);
@@ -63,7 +63,7 @@ public class Student extends Person {
 	public void setGradeLevel(int gradeLevel) {
 		this.gradeLevel = gradeLevel;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,25 +100,24 @@ public class Student extends Person {
 			return false;
 		return true;
 	}
-	
-	public boolean essentialyEquals(Object obj){
+
+	public boolean essentialyEquals(Object obj) {
 		Student s = null;
-		if(obj instanceof Student)
-			s = (Student)obj;
+		if (obj instanceof Student)
+			s = (Student) obj;
 		else
 			return false;
-		
-		if(!super.equals(obj))
+
+		if (!super.equals(obj))
 			return false;
-		
+
 		return this.getGradeLevel() == s.getGradeLevel();
 	}
 
 	@Override
 	public String toString() {
-		return "Student [gradeLevel=" + gradeLevel + ", timeIn=" + timeIn + ", timeOut=" + timeOut + ", status=" + status + "]";
+		return "Student [name=" + this.getName() + " pin=" + this.getPin()
+				+ " grade=" + this.getGradeLevel() + "]";
 	}
-	
-	
 
 }
