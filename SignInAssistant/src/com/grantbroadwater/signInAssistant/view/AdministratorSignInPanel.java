@@ -98,12 +98,17 @@ public class AdministratorSignInPanel extends GPanel {
 		this.add(mainPanel, BorderLayout.CENTER);
 	}
 	
+	public AdministratorSignInPanel(java.awt.event.ActionListener listener){
+		this();
+		addActionListener(listener);
+	}
+	
 	@Override // From GPanel
 	public Dimension getPreferedSize(){
 		return new Dimension(WIDTH, HEIGHT);
 	}
 	
-	public JPanel makePanel(JLabel lbl, Component tf){
+	private JPanel makePanel(JLabel lbl, Component tf){
 		JPanel result = new JPanel();
 		result.setBackground(Color.WHITE);
 		result.setPreferredSize(new Dimension(WIDTH / 2, HEIGHT));
@@ -119,4 +124,16 @@ public class AdministratorSignInPanel extends GPanel {
 		return result;
 	}
 
+	public void addActionListener(java.awt.event.ActionListener listener){
+		btnSignIn.addActionListener(listener);
+	}
+	
+	public String getName(){
+		return tfName.getText();
+	}
+	
+	public String getPin(){
+		return tfPin.getText();
+	}
+	
 }
