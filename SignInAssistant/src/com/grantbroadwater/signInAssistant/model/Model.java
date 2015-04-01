@@ -231,6 +231,9 @@ public class Model {
 		if(lastName == null)
 			lastName = "";
 		
+		firstName = firstName.toLowerCase();
+		lastName = lastName.toLowerCase();
+		
 		if(!pin.equals("") && studentBody.containsKey(pin)){
 			Student[] result = new Student[1];
 			result[0] = studentBody.get(pin);
@@ -240,7 +243,7 @@ public class Model {
 			ArrayList<Student> list = new ArrayList<Student>();
 			for(String  k: studentBody.keySet()){
 				Student s = studentBody.get(k);
-				if(s.getLastName().indexOf(lastName) != -1)
+				if(s.getLastName().toLowerCase().indexOf(lastName) != -1)
 					list.add(s);
 			}
 			return list.toArray(new Student[list.size()]);
@@ -248,7 +251,7 @@ public class Model {
 			ArrayList<Student> list = new ArrayList<Student>();
 			for(String  k: studentBody.keySet()){
 				Student s = studentBody.get(k);
-				if(s.getFirstName().indexOf(firstName) != -1)
+				if(s.getFirstName().toLowerCase().indexOf(firstName) != -1)
 					list.add(s);
 			}
 			return list.toArray(new Student[list.size()]);
@@ -256,7 +259,7 @@ public class Model {
 			ArrayList<Student> list = new ArrayList<Student>();
 			for(String  k: studentBody.keySet()){
 				Student s = studentBody.get(k);
-				if(s.getLastName().indexOf(lastName) != -1 && s.getFirstName().indexOf(firstName) != -1)
+				if(s.getLastName().toLowerCase().indexOf(lastName) != -1 && s.getFirstName().toLowerCase().indexOf(firstName) != -1)
 					list.add(s);
 			}
 			return list.toArray(new Student[list.size()]);
@@ -273,6 +276,9 @@ public class Model {
 		if(lastName == null)
 			lastName = "";
 		
+		firstName = firstName.toLowerCase();
+		lastName = lastName.toLowerCase();
+		
 		if(!pin.equals("") && administration.containsKey(pin)){
 			Administrator[] result = new Administrator[1];
 			result[0] = administration.get(pin);
@@ -283,7 +289,7 @@ public class Model {
 			ArrayList<Administrator> list = new ArrayList<Administrator>();
 			for(String  k: administration.keySet()){
 				Administrator s = administration.get(k);
-				if(s.getLastName().indexOf(lastName) != -1)
+				if(s.getLastName().toLowerCase().indexOf(lastName) != -1)
 					list.add(s);
 			}
 			return list.toArray(new Administrator[list.size()]);
@@ -291,7 +297,7 @@ public class Model {
 			ArrayList<Administrator> list = new ArrayList<Administrator>();
 			for(String  k: administration.keySet()){
 				Administrator s = administration.get(k);
-				if(s.getFirstName().indexOf(firstName) != -1)
+				if(s.getFirstName().toLowerCase().indexOf(firstName) != -1)
 					list.add(s);
 			}
 			return list.toArray(new Administrator[list.size()]);
@@ -299,7 +305,7 @@ public class Model {
 			ArrayList<Administrator> list = new ArrayList<Administrator>();
 			for(String  k: administration.keySet()){
 				Administrator s = administration.get(k);
-				if(s.getLastName().indexOf(lastName) != -1 && s.getFirstName().indexOf(firstName) != -1)
+				if(s.getLastName().toLowerCase().indexOf(lastName) != -1 && s.getFirstName().toLowerCase().indexOf(firstName) != -1)
 					list.add(s);
 			}
 			return list.toArray(new Administrator[list.size()]);
