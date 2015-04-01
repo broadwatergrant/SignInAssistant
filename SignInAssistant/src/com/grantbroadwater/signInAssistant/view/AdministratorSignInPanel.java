@@ -5,9 +5,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -134,6 +136,10 @@ public class AdministratorSignInPanel extends GPanel {
 	
 	public String getPin(){
 		return tfPin.getText();
+	}
+	
+	public void displayMessageBox(String message){
+		JOptionPane.showMessageDialog(this, message);
 	}
 	
 }
