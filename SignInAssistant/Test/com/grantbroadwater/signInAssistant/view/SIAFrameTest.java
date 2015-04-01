@@ -21,7 +21,7 @@ public class SIAFrameTest {
 		
 		frame.setPanels(panels, panelNames);
 		frame.showPanel(0);
-		frame.setSize(300, 300);
+		frame.setSize(AdministratorSignInPanel.WIDTH, AdministratorSignInPanel.HEIGHT);
 		frame.setVisible(true);
 		
 		try {

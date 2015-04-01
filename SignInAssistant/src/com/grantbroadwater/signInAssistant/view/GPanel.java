@@ -1,5 +1,6 @@
 package com.grantbroadwater.signInAssistant.view;
 
+import java.awt.Dimension;
 import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
@@ -25,5 +26,7 @@ public abstract class GPanel extends JPanel {
 	public final String getCardLayoutName(){
 		return this.getClass().getName() + instanceCount;
 	}
+	
+	public abstract Dimension getPreferedSize();
 
 }
