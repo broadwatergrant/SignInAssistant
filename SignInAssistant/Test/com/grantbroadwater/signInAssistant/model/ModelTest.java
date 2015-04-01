@@ -1,10 +1,7 @@
 package com.grantbroadwater.signInAssistant.model;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.Student;
 
 public class ModelTest {
