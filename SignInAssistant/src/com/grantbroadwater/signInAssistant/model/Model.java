@@ -314,4 +314,11 @@ public class Model {
 		}
 	}
 	
+	public boolean adminIsValid(String pin, String name){
+		return administration.containsKey(pin)
+				&& (administration.get(pin).getFirstName().equalsIgnoreCase(name)
+						|| administration.get(pin).getLastName().equalsIgnoreCase(name));
+
+	}
+	
 }
