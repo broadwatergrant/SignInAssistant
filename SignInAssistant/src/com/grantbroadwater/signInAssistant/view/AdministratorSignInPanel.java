@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -82,6 +84,13 @@ public class AdministratorSignInPanel extends GPanel {
 		mainPanel.add(fillTop);
 		
 		tfName = new JTextField();
+		tfName.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tfPin.requestFocus();
+			}
+		});
 		mainPanel.add(makePanel(new JLabel("Name: "), tfName));
 		
 		tfPin = new JTextField();
@@ -127,6 +136,7 @@ public class AdministratorSignInPanel extends GPanel {
 	}
 
 	public void setActionListener(java.awt.event.ActionListener listener){
+		tfPin.addActionListener(listener);
 		btnSignIn.addActionListener(listener);
 	}
 	
