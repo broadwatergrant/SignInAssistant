@@ -9,7 +9,7 @@ public class Controller {
 	}
 
 	protected void signInAdmin(Administrator admin){
-		
+		System.out.println(admin.getFirstName() + " to be signed in");
 	}
 	
 }

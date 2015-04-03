@@ -102,7 +102,7 @@ public class AdministratorSignInPanel extends GPanel {
 	
 	public AdministratorSignInPanel(java.awt.event.ActionListener listener){
 		this();
-		addActionListener(listener);
+		setActionListener(listener);
 	}
 	
 	@Override // From GPanel
@@ -126,7 +126,7 @@ public class AdministratorSignInPanel extends GPanel {
 		return result;
 	}
 
-	public void addActionListener(java.awt.event.ActionListener listener){
+	public void setActionListener(java.awt.event.ActionListener listener){
 		btnSignIn.addActionListener(listener);
 	}
 	
