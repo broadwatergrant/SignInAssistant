@@ -115,7 +115,7 @@ public class AdministratorSignInPanel extends GPanel {
 	}
 	
 	@Override // From GPanel
-	public Dimension getPreferedSize(){
+	public Dimension getPreferredSize(){
 		return new Dimension(WIDTH, HEIGHT);
 	}
 	

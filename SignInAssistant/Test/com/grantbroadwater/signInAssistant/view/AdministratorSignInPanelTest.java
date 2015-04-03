@@ -1,7 +1,5 @@
 package com.grantbroadwater.signInAssistant.view;
 
-import java.awt.Dimension;
-
 import javax.swing.JPanel;
 
 import org.junit.Test;
@@ -27,8 +25,8 @@ public class AdministratorSignInPanelTest {
 		String[] panelNames = {panel.getCardLayoutName()};
 		SIAFrame frame = new SIAFrame(panels, panelNames);
 		
-		frame.setMaximumSize(new Dimension(AdministratorSignInPanel.WIDTH, AdministratorSignInPanel.HEIGHT));
-		frame.setMinimumSize(new Dimension(AdministratorSignInPanel.WIDTH, AdministratorSignInPanel.HEIGHT));
+		frame.setMaximumSize(panel.getPreferredSize());
+		frame.setMinimumSize(panel.getPreferredSize());
 		frame.setVisible(true);
 		
 		try {

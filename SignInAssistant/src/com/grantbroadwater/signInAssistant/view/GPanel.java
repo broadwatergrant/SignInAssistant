@@ -27,6 +27,6 @@ public abstract class GPanel extends JPanel {
 		return this.getClass().getName() + instanceCount;
 	}
 	
-	public abstract Dimension getPreferedSize();
+	public abstract Dimension getPreferredSize();
 
 }
