@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.LayoutManager;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,6 +19,9 @@ public class AdministratorPanel extends GPanel {
 
 	private BorderLayout borderLayout;
 	private Font font;
+	private JComboBox<String> cbSchedule;
+	private JButton btnSave;
+	private JButton btnStart;
 	
 	public AdministratorPanel() {
 		super(new BorderLayout());
@@ -44,7 +48,7 @@ public class AdministratorPanel extends GPanel {
 		JPanel signInSheetBarPanel = new JPanel(new BorderLayout());
 		signInSheetBarPanel.setBackground(Color.PINK);
 		
-		JButton btnSave = new JButton("Save");
+		btnSave = new JButton("Save");
 		signInSheetBarPanel.add(btnSave, BorderLayout.WEST);
 		
 		JLabel lblSignInSheet = new JLabel("Sign In Sheet");
@@ -54,7 +58,7 @@ public class AdministratorPanel extends GPanel {
 		signInSheetBarPanel.add(textPanel, BorderLayout.CENTER);
 		
 		
-		JButton btnStart = new JButton("Start");
+		btnStart = new JButton("Start");
 		signInSheetBarPanel.add(btnStart, BorderLayout.EAST);
 		
 		signInSheetPanel.add(signInSheetBarPanel, BorderLayout.NORTH);
