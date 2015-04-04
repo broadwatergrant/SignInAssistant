@@ -7,6 +7,7 @@ public class Student extends Person {
 	private int gradeLevel;
 	private GregorianCalendar timeIn, timeOut;
 	private Status status;
+	private boolean autoSignedOut;
 
 	public Student() {
 		super();
@@ -62,6 +63,14 @@ public class Student extends Person {
 
 	public void setGradeLevel(int gradeLevel) {
 		this.gradeLevel = gradeLevel;
+	}
+
+	public boolean isAutoSignedOut() {
+		return autoSignedOut;
+	}
+
+	public void setAutoSignedOut(boolean autoSignedOut) {
+		this.autoSignedOut = autoSignedOut;
 	}
 
 	@Override
