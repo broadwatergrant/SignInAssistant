@@ -5,19 +5,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
 
@@ -26,12 +22,12 @@ import com.grantbroadwater.school.Person;
 public class DataPanel extends GPanel {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final int WIDTH = 475, HEIGHT = 500;
 
 	private JTextField tfPin, tfFirst, tfLast;
 	private ResultsTableModel studentResultsModel, adminResultsModel;
-	
+
 	public DataPanel() {
 		super(new BorderLayout());
 		setBackground(Color.WHITE);
@@ -43,12 +39,12 @@ public class DataPanel extends GPanel {
 	public Dimension getPreferredSize() {
 		return new Dimension(WIDTH, HEIGHT);
 	}
-	
-	private JPanel createEntryPanel(){
+
+	private JPanel createEntryPanel() {
 		JPanel housingPanel = new JPanel();
 		housingPanel.setLayout(new BoxLayout(housingPanel, BoxLayout.Y_AXIS));
 		housingPanel.setBackground(Color.WHITE);
-		
+
 		JPanel lblPanel = new JPanel(new BorderLayout());
 		JPanel p1 = new JPanel();
 		p1.setBackground(Color.WHITE);
@@ -64,7 +60,7 @@ public class DataPanel extends GPanel {
 		lblPanel.add(p2, BorderLayout.EAST);
 		lblPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblPanel.setBackground(Color.WHITE);
-		
+
 		JPanel tfPanel = new JPanel(new BorderLayout());
 		tfPin = new JTextField(8);
 		JPanel pnlP = new JPanel();
@@ -83,94 +79,93 @@ public class DataPanel extends GPanel {
 		tfPanel.add(pnlL, BorderLayout.EAST);
 		tfPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		tfPanel.setBackground(Color.WHITE);
-		
+
 		housingPanel.add(lblPanel);
 		housingPanel.add(tfPanel);
-		
+
 		return housingPanel;
 	}
 
-	
-	private JPanel createBodyPanel(){
+	private JPanel createBodyPanel() {
 		JPanel housingPanel = new JPanel();
 		housingPanel.setLayout(new BoxLayout(housingPanel, BoxLayout.Y_AXIS));
-		
+
 		housingPanel.add(createAdminResultsPanel(), BorderLayout.NORTH);
 		housingPanel.add(createStudentResultsPanel(), BorderLayout.CENTER);
-		
+
 		return housingPanel;
 	}
-	
-	private JPanel createStudentResultsPanel(){
+
+	private JPanel createStudentResultsPanel() {
 		JPanel housingPanel = new JPanel();
-		
+
 		JTable table = new JTable(new ResultsTableModel());
 		studentResultsModel = (ResultsTableModel) table.getModel();
 		table.setFillsViewportHeight(true);
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
-		
+
 		housingPanel.add(scrollPane);
-		
+
 		return housingPanel;
 	}
-	
-	private JPanel createAdminResultsPanel(){
+
+	private JPanel createAdminResultsPanel() {
 		JPanel housingPanel = new JPanel();
-		
+
 		JTable table = new JTable(new ResultsTableModel());
 		adminResultsModel = (ResultsTableModel) table.getModel();
 		table.setFillsViewportHeight(true);
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
-		
+
 		housingPanel.add(scrollPane);
-		
+
 		return housingPanel;
 	}
-	
-	public void setStudentsResult(ArrayList<Person> results){
+
+	public void setStudentsResult(ArrayList<Person> results) {
 		studentResultsModel.setResults(results);
 	}
-	
-	public void setAdminsResult(ArrayList<Person> results){
+
+	public void setAdminsResult(ArrayList<Person> results) {
 		adminResultsModel.setResults(results);
 	}
-	
-	public String getPin(){
+
+	public String getPin() {
 		return tfPin.getText();
 	}
-	
-	public String getFirstName(){
+
+	public String getFirstName() {
 		return tfFirst.getText();
 	}
-	
-	public String getLastName(){
+
+	public String getLastName() {
 		return tfLast.getText();
 	}
-	
-	public void displayMessageDialog(String message){
+
+	public void displayMessageDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}
-	
-	public void addDocumentListener(DocumentListener listener){
+
+	public void addDocumentListener(DocumentListener listener) {
 		tfPin.getDocument().addDocumentListener(listener);
 		tfFirst.getDocument().addDocumentListener(listener);
 		tfLast.getDocument().addDocumentListener(listener);
 	}
-	
+
 }
 
-class ResultsTableModel extends AbstractTableModel{
+class ResultsTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
-	private String[] columnNames = {"Pin", "First Name", "Last Name"};
+	private String[] columnNames = { "Pin", "First Name", "Last Name" };
 	private ArrayList<ArrayList<Object>> data;
-	
-	public ResultsTableModel(){
+
+	public ResultsTableModel() {
 		data = new ArrayList<ArrayList<Object>>();
 	}
-	
+
 	@Override
 	public int getRowCount() {
 		return data.size();
@@ -185,45 +180,45 @@ class ResultsTableModel extends AbstractTableModel{
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		return data.get(rowIndex).get(columnIndex);
 	}
-	
+
 	@Override
-	public String getColumnName(int columnIndex){
+	public String getColumnName(int columnIndex) {
 		return columnNames[columnIndex];
 	}
-	
+
 	@Override
-	public Class<?> getColumnClass(int columnIndex){
+	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
 	}
-	
+
 	@Override
-	public boolean isCellEditable(int rowIndex, int ColumnIndex){
+	public boolean isCellEditable(int rowIndex, int ColumnIndex) {
 		return false;
 	}
-	
+
 	@Override
-	public void setValueAt(Object value, int rowIndex, int columnIndex){
+	public void setValueAt(Object value, int rowIndex, int columnIndex) {
 		data.get(rowIndex).set(columnIndex, value);
 		fireTableCellUpdated(rowIndex, columnIndex);
 	}
-	
-	public void setResults(ArrayList<Person> results){
+
+	public void setResults(ArrayList<Person> results) {
 		data.clear();
-		
-		for(Person person : results)
+
+		for (Person person : results)
 			data.add(getRow(person));
-			
+
 		fireTableDataChanged();
 	}
-	
-	private ArrayList<Object> getRow(Person person){
+
+	private ArrayList<Object> getRow(Person person) {
 		ArrayList<Object> result = new ArrayList<Object>();
-		
+
 		result.add(person.getPin());
 		result.add(person.getFirstName());
 		result.add(person.getLastName());
-		
+
 		return result;
 	}
-	
+
 }
