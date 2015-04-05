@@ -133,9 +133,18 @@ public class StudentPanel extends GPanel {
 		lblConfirm.setText(text);
 	}
 	
+	public void setConfirmVisibility(boolean value){
+		lblConfirm.setVisible(value);
+	}
+	
 	public void notifyPinIsIncorrect(){
 		lblDisplay.setText("Incorrect Pin");
 		lblDisplay.setForeground(Color.RED);
+	}
+	
+	public void removeIncorrectPinNotification(){
+		lblDisplay.setText("Pin: ");
+		lblDisplay.setForeground(Color.BLACK);
 	}
 	
 }
