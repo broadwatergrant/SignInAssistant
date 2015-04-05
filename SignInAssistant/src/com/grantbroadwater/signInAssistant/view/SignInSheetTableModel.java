@@ -14,9 +14,11 @@ public class SignInSheetTableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"First Name", "Last Name", "Status", "Time in", "Time Out", "Auto Signed Out"};
 	private ArrayList<ArrayList<Object>> data;
+	private ArrayList<Student> studentList;
 	
 	public SignInSheetTableModel() {
 		data = new ArrayList<ArrayList<Object>>();
+		studentList = new ArrayList<Student>();
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class SignInSheetTableModel extends AbstractTableModel {
 		data.get(rowIndex).set(columnIndex, value);
 	}
 	
-	public void addStudent(Student student){
+	public void signStudentIn(Student student){
 		ArrayList<Object> newEntry = new ArrayList<Object>();
 		
 		newEntry.add(student.getFirstName());
@@ -65,8 +67,25 @@ public class SignInSheetTableModel extends AbstractTableModel {
 		newEntry.add(student.isAutoSignedOut());
 		
 		data.add(newEntry);
+		studentList.add(student);
 		
 		fireTableRowsInserted(data.size() - 1, data.size());
+	}
+	
+	public void signStudentOut(Student s){
+		for(int i=0; i < studentList.size(); i++){
+			if(studentList.get(i).essentialyEquals(s)){
+				setValueAt(s.getStatus(), i, 2);
+				fireTableCellUpdated(i, 2);
+				setValueAt(formatTime(s.getTimeOut()), i, 4);
+				fireTableCellUpdated(i, 4);
+				if(s.isAutoSignedOut()){
+					setValueAt(true, i, 5);
+					fireTableCellUpdated(i, 5);
+				}
+				break;
+			}
+		}
 	}
 	
 	public void deleteRow(int rowIndex){

@@ -51,11 +51,19 @@ public class SignInSheetTableModelTest {
 		
 		Student s = new Student("Grant", "Broadwater", "10101", 12);
 		s.setTimeIn(gci);
+		s.setStatus(Status.IN);
+		
+		model.signStudentIn(s);
+		
 		s.setTimeOut(gco);
 		s.setStatus(Status.OUT);
 		s.setAutoSignedOut(true);
 		
-		model.addStudent(s);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {}
+		
+		model.signStudentOut(s);
 		
 		try {
 			Thread.sleep(15000);
@@ -79,7 +87,7 @@ public class SignInSheetTableModelTest {
 			public void actionPerformed(ActionEvent e) {
 				String first = tfFirst.getText();
 				String last = tfLast.getText();
-				model.addStudent(new Student(first, last, "11111"));
+				model.signStudentIn(new Student(first, last, "11111"));
 
 				table.scrollRectToVisible(table.getCellRect(
 						table.getRowCount() - 1, 0, true));
