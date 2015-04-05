@@ -5,16 +5,20 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
 
 public class AdministratorPanel extends GPanel {
@@ -25,15 +29,14 @@ public class AdministratorPanel extends GPanel {
 	@SuppressWarnings("unused")
 	private BorderLayout borderLayout;
 	private Font font;
-	@SuppressWarnings("unused")
 	private JComboBox<String> cbSchedule;
 	private JButton btnSave;
 	private JButton btnStart;
-	private JTable signInSheet;
+	private SignInSheetTable signInSheet;
 	private SignInSheetTableModel model;
 	private boolean stayAtBottom;
 	
-	public AdministratorPanel() {
+	public AdministratorPanel(ArrayList<BellSchedule> schedules) {
 		super(new BorderLayout());
 		borderLayout = (BorderLayout) this.getLayout();
 		
@@ -47,16 +50,24 @@ public class AdministratorPanel extends GPanel {
 		fillTop.setPreferredSize(new Dimension(WIDTH, 25));
 		fillTop.setBackground(Color.WHITE);
 		schedulePanel.add(fillTop);
-		JLabel lblToday = new JLabel("Today is a ");
+		JLabel lblToday = new JLabel("  Today's schedule: ");
 		lblToday.setFont(font);
 		schedulePanel.add(lblToday);
+		
+		String[] scheduleArray = new String[schedules.size()];
+		for(int i=0; i<scheduleArray.length; i++)
+			scheduleArray[i] = schedules.get(i).getName();
+			
+		cbSchedule = new JComboBox<String>(scheduleArray);
+		schedulePanel.add(cbSchedule);
+		
 		this.add(schedulePanel, BorderLayout.NORTH);
 		
 		JPanel signInSheetPanel = new JPanel(new BorderLayout());
-		signInSheetPanel.setBackground(Color.GREEN);
+		signInSheetPanel.setBackground(Color.WHITE);
 		
 		JPanel signInSheetBarPanel = new JPanel(new BorderLayout());
-		signInSheetBarPanel.setBackground(Color.PINK);
+		signInSheetBarPanel.setBackground(Color.WHITE);
 		
 		btnSave = new JButton("Save");
 		signInSheetBarPanel.add(btnSave, BorderLayout.WEST);
@@ -65,6 +76,7 @@ public class AdministratorPanel extends GPanel {
 		lblSignInSheet.setFont(font);
 		JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		textPanel.add(lblSignInSheet);
+		textPanel.setBackground(Color.WHITE);
 		signInSheetBarPanel.add(textPanel, BorderLayout.CENTER);
 		
 		
@@ -73,7 +85,7 @@ public class AdministratorPanel extends GPanel {
 		
 		signInSheetPanel.add(signInSheetBarPanel, BorderLayout.NORTH);
 		
-		signInSheet = new JTable(new SignInSheetTableModel());
+		signInSheet = new SignInSheetTable();
 		model = (SignInSheetTableModel) signInSheet.getModel();
 		JScrollPane scrollPane = new JScrollPane(signInSheet);
 		
@@ -89,15 +101,31 @@ public class AdministratorPanel extends GPanel {
 		return new Dimension(WIDTH, HEIGHT);
 	}
 
-	public SignInSheetTableModel getSignInSheetTableModel(){
-		return model;
-	}
+//	public SignInSheetTableModel getSignInSheetTableModel(){
+//		return model;
+//	}
 	
 	public void addStudent(Student s){
-		model.addStudent(s);
+		signInSheet.addStudent(s);
 		if(stayAtBottom){
 			signInSheet.scrollRectToVisible(signInSheet.getCellRect(signInSheet.getRowCount() - 1, 0, true));
 		}
+	}
+	
+	public String getSelectedScheduleName(){
+		return (String)cbSchedule.getSelectedItem();
+	}
+	
+	public void addStartActionListener(ActionListener listener){
+		btnStart.addActionListener(listener);
+	}
+	
+	public void addSaveActionListener(ActionListener listener){
+		btnSave.addActionListener(listener);
+	}
+	
+	public void ShowMessageDialog(String message){
+		JOptionPane.showMessageDialog(this, message);
 	}
 	
 }

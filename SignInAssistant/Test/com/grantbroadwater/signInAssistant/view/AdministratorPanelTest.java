@@ -1,9 +1,13 @@
 package com.grantbroadwater.signInAssistant.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JPanel;
 
 import org.junit.Test;
 
+import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
 //import com.grantbroadwater.signInAssistant.controller.AdminSignInListener;
 import com.grantbroadwater.signInAssistant.controller.Controller;
@@ -19,7 +23,7 @@ public class AdministratorPanelTest {
 		@SuppressWarnings("unused")
 		Controller controller = new Controller();
 		
-		AdministratorPanel panel = new AdministratorPanel();
+		AdministratorPanel panel = new AdministratorPanel(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
 //		AdminSignInListener listener = new AdminSignInListener(model, panel, controller);
 //		panel.setActionListener(listener);
 		

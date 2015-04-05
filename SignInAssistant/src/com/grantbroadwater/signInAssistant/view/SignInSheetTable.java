@@ -19,10 +19,6 @@ public class SignInSheetTable extends JTable{
 		new Log(LogType.DEBUG, "new Sign In sheet");
 	}
 
-	public SignInSheetTableModel getModel() {
-		return model;
-	}
-
 	public void addStudent(Student student) {
 		model.addStudent(student);
 	}
