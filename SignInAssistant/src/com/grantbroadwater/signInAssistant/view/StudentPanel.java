@@ -45,6 +45,7 @@ public class StudentPanel extends GPanel {
 		add(mainPanel, BorderLayout.CENTER);
 		add(footer, BorderLayout.SOUTH);
 		
+		this.setConfirmVisibility(false);
 	}
 
 	@Override
@@ -118,7 +119,7 @@ public class StudentPanel extends GPanel {
 	}
 	
 	public String getPin(){
-		return tfPin.getText();
+		return tfPin.getText().trim();
 	}
 	
 	public void addConfirmListener(ActionListener listener){
