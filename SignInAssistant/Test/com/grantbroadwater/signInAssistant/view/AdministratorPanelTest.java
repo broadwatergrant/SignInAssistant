@@ -24,8 +24,8 @@ public class AdministratorPanelTest {
 		Controller controller = new Controller();
 		
 		AdministratorPanel panel = new AdministratorPanel(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
-//		AdminSignInListener listener = new AdminSignInListener(model, panel, controller);
-//		panel.setActionListener(listener);
+		// TODO: add save action listener
+		// TODO: add start action listener
 		
 		
 		JPanel[] panels = {panel};
@@ -38,7 +38,7 @@ public class AdministratorPanelTest {
 		
 		Student student = new Student("Grant", "Broadwater", "10101");
 		for(int i=0; i<26; i++){
-			panel.addStudent(student);
+			panel.signStudentIn(student);
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {}

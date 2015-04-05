@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.List;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -16,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
@@ -33,7 +30,6 @@ public class AdministratorPanel extends GPanel {
 	private JButton btnSave;
 	private JButton btnStart;
 	private SignInSheetTable signInSheet;
-	private SignInSheetTableModel model;
 	private boolean stayAtBottom;
 	
 	public AdministratorPanel(ArrayList<BellSchedule> schedules) {
@@ -86,7 +82,6 @@ public class AdministratorPanel extends GPanel {
 		signInSheetPanel.add(signInSheetBarPanel, BorderLayout.NORTH);
 		
 		signInSheet = new SignInSheetTable();
-		model = (SignInSheetTableModel) signInSheet.getModel();
 		JScrollPane scrollPane = new JScrollPane(signInSheet);
 		
 		signInSheetPanel.add(scrollPane, BorderLayout.CENTER);
@@ -105,11 +100,15 @@ public class AdministratorPanel extends GPanel {
 //		return model;
 //	}
 	
-	public void addStudent(Student s){
-		signInSheet.addStudent(s);
+	public void signStudentIn(Student s){
+		signInSheet.signStudentIn(s);
 		if(stayAtBottom){
 			signInSheet.scrollRectToVisible(signInSheet.getCellRect(signInSheet.getRowCount() - 1, 0, true));
 		}
+	}
+	
+	public void signStudentOut(Student s){
+		signInSheet.signStudentOut(s);
 	}
 	
 	public String getSelectedScheduleName(){
