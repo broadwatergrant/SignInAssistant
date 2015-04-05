@@ -21,9 +21,12 @@ public class StudentSignInActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String pin = studentPanel.getPin();
+		if(pin.equals(""))
+			return;
 		if(model.studentIsValid(pin)){
 			studentPanel.removeIncorrectPinNotification();
 			controller.punchStudent(model.getStudentBody().get(pin));
+			studentPanel.clearPinText();
 		}else{
 			studentPanel.notifyPinIsIncorrect();
 		}

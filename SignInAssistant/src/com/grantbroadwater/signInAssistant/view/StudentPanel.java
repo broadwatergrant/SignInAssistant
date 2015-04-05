@@ -107,6 +107,8 @@ public class StudentPanel extends GPanel {
 		JPanel lblPnl = new JPanel();
 		lblPnl.setBackground(Color.WHITE);
 		lblConfirm = new JLabel("Sign In/Out as: ");
+		lblConfirm.setForeground(new Color(0, 153, 51));
+		lblConfirm.setFont(new Font(this.getFont().getFontName(), this.getFont().getStyle(), 18));
 		lblPnl.add(lblConfirm);
 		housingPanel.add(lblPnl, BorderLayout.NORTH);
 		housingPanel.add(new JLabel(""), BorderLayout.CENTER);
@@ -122,6 +124,10 @@ public class StudentPanel extends GPanel {
 		return tfPin.getText().trim();
 	}
 	
+	public void clearPinText(){
+		tfPin.setText("");
+	}
+	
 	public void addConfirmListener(ActionListener listener){
 		tfPin.addActionListener(listener);
 	}
@@ -135,7 +141,9 @@ public class StudentPanel extends GPanel {
 	}
 	
 	public void setConfirmVisibility(boolean value){
-		lblConfirm.setVisible(value);
+		if(!value){
+			this.setConfirmText(" ");
+		}
 	}
 	
 	public void notifyPinIsIncorrect(){

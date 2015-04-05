@@ -3,6 +3,7 @@ package com.grantbroadwater.signInAssistant.view;
 import org.junit.Test;
 
 import com.grantbroadwater.signInAssistant.controller.Controller;
+import com.grantbroadwater.signInAssistant.controller.StudentPinDocumentListener;
 import com.grantbroadwater.signInAssistant.controller.StudentSignInActionListener;
 import com.grantbroadwater.signInAssistant.model.Model;
 
@@ -21,6 +22,9 @@ public class StudentViewTest {
 		
 		StudentSignInActionListener listener = new StudentSignInActionListener(model, studentPanel, controller);
 		studentPanel.addConfirmListener(listener);
+		
+		StudentPinDocumentListener documentListener = new StudentPinDocumentListener(model, studentPanel);
+		studentPanel.addDocumentListener(documentListener);
 		
 		frame.setVisible(true);
 		
