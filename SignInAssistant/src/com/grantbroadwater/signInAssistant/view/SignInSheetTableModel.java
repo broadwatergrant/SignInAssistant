@@ -95,6 +95,6 @@ public class SignInSheetTableModel extends AbstractTableModel {
 	}
 	
 	private String formatTime(GregorianCalendar gc){
-		return gc.get(Calendar.HOUR) + ":" + gc.get(Calendar.MINUTE);
+		return gc.get(Calendar.HOUR_OF_DAY) + ":" + gc.get(Calendar.MINUTE);
 	}
 }

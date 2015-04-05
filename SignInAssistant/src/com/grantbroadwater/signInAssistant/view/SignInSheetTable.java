@@ -19,10 +19,14 @@ public class SignInSheetTable extends JTable{
 		new Log(LogType.DEBUG, "new Sign In sheet");
 	}
 
-	public void addStudent(Student student) {
-		model.addStudent(student);
+	public void signStudentIn(Student student) {
+		model.signStudentIn(student);
 	}
 
+	public void signStudentOut(Student student){
+		model.signStudentOut(student);
+	}
+	
 	public void deleteRow(int rowIndex) {
 		model.deleteRow(rowIndex);
 	}

@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 
 import org.junit.Test;
 
+import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
 
 public class SignInSheetTableTest implements ActionListener{
@@ -94,8 +96,10 @@ public class SignInSheetTableTest implements ActionListener{
 		String last = tfLast.getText();
 		
 		Student s = new Student(first, last, "11111");
+		s.setStatus(Status.IN);
+		s.setTimeIn(new GregorianCalendar());
 		
-		table.addStudent(s);
+		table.signStudentIn(s);
 		
 		table.scrollRectToVisible(table.getCellRect(table.getRowCount() - 1, 0, true));
 	}
