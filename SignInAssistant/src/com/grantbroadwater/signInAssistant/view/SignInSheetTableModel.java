@@ -72,8 +72,8 @@ public class SignInSheetTableModel extends AbstractTableModel {
 		fireTableRowsInserted(data.size() - 1, data.size());
 	}
 	
-	public void signStudentOut(Student s){
-		for(int i=0; i < studentList.size(); i++){
+	public int signStudentOut(Student s){
+		for(int i=studentList.size() - 1; i >= 0; i--){
 			if(studentList.get(i).essentialyEquals(s)){
 				setValueAt(s.getStatus(), i, 2);
 				fireTableCellUpdated(i, 2);
@@ -83,9 +83,10 @@ public class SignInSheetTableModel extends AbstractTableModel {
 					setValueAt(true, i, 5);
 					fireTableCellUpdated(i, 5);
 				}
-				break;
+				return i;
 			}
 		}
+		return -1;
 	}
 	
 	public void deleteRow(int rowIndex){

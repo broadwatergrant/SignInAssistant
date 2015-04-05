@@ -38,7 +38,7 @@ public class SignInSheetTableModelTest {
 		});
 		
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {}
 		
 		GregorianCalendar gci = new GregorianCalendar();
@@ -53,6 +53,7 @@ public class SignInSheetTableModelTest {
 		s.setTimeIn(gci);
 		s.setStatus(Status.IN);
 		
+		model.signStudentIn(new Student("Chris", "Rood", "20202"));
 		model.signStudentIn(s);
 		
 		s.setTimeOut(gco);
@@ -64,6 +65,7 @@ public class SignInSheetTableModelTest {
 		} catch (InterruptedException e1) {}
 		
 		model.signStudentOut(s);
+		System.out.println("signed out");
 		
 		try {
 			Thread.sleep(15000);
