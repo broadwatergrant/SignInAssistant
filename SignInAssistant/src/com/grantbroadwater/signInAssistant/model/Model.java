@@ -321,4 +321,8 @@ public class Model {
 
 	}
 	
+	public boolean studentIsValid(String pin){
+		return studentBody.containsKey(pin);
+	}
+	
 }
