@@ -234,6 +234,8 @@ public class Model {
 		firstName = firstName.toLowerCase();
 		lastName = lastName.toLowerCase();
 		
+		// TODO: Better define results
+		
 		if(!pin.equals("") && studentBody.containsKey(pin)){
 			Student[] result = new Student[1];
 			result[0] = studentBody.get(pin);
