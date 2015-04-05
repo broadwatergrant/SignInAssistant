@@ -5,23 +5,26 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.LayoutManager;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class AdministratorPanel extends GPanel {
 	
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 800, HEIGHT = 600;
 
+	@SuppressWarnings("unused")
 	private BorderLayout borderLayout;
 	private Font font;
+	@SuppressWarnings("unused")
 	private JComboBox<String> cbSchedule;
 	private JButton btnSave;
 	private JButton btnStart;
+//	private SignInSheetTable signInSheetTable;
 	
 	public AdministratorPanel() {
 		super(new BorderLayout());
@@ -63,6 +66,11 @@ public class AdministratorPanel extends GPanel {
 		
 		signInSheetPanel.add(signInSheetBarPanel, BorderLayout.NORTH);
 		
+//		signInSheetTable = new SignInSheetTable();
+//		JScrollPane scrollPane = new JScrollPane(signInSheetTable);
+//		
+		//signInSheetPanel.add(scrollPane, BorderLayout.CENTER);
+		
 		this.add(signInSheetPanel, BorderLayout.CENTER);
 		
 		setBackground(Color.WHITE);
@@ -73,4 +81,8 @@ public class AdministratorPanel extends GPanel {
 		return new Dimension(WIDTH, HEIGHT);
 	}
 
+//	public SignInSheetTable getSignInSheetTable(){
+//		return signInSheetTable;
+//	}
+//	
 }

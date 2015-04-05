@@ -1,12 +1,12 @@
 package com.grantbroadwater.signInAssistant.view;
 
-import static org.junit.Assert.*;
-
 import javax.swing.JPanel;
 
 import org.junit.Test;
 
-import com.grantbroadwater.signInAssistant.controller.AdminSignInListener;
+
+import com.grantbroadwater.school.Student;
+//import com.grantbroadwater.signInAssistant.controller.AdminSignInListener;
 import com.grantbroadwater.signInAssistant.controller.Controller;
 import com.grantbroadwater.signInAssistant.model.Model;
 
@@ -17,17 +17,21 @@ public class AdministratorPanelTest {
 		Model model = new Model();
 		model.loadData();
 		
+		@SuppressWarnings("unused")
 		Controller controller = new Controller();
 		
 		AdministratorPanel panel = new AdministratorPanel();
 //		AdminSignInListener listener = new AdminSignInListener(model, panel, controller);
 //		panel.setActionListener(listener);
 		
+		Student student = new Student("Grant", "Broadwater", "10101");
+		//panel.getSignInSheetTable().addStudent(student);
+		
 		JPanel[] panels = {panel};
 		String[] panelNames = {panel.getCardLayoutName()};
 		SIAFrame frame = new SIAFrame(panels, panelNames);
 		
-		frame.setMaximumSize(panel.getPreferredSize());
+		//frame.setMaximumSize(panel.getPreferredSize());
 		frame.setMinimumSize(panel.getPreferredSize());
 		frame.setVisible(true);
 		
