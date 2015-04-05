@@ -5,12 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import com.grantbroadwater.school.Student;
 
 public class AdministratorPanel extends GPanel {
 	
@@ -24,14 +29,16 @@ public class AdministratorPanel extends GPanel {
 	private JComboBox<String> cbSchedule;
 	private JButton btnSave;
 	private JButton btnStart;
-//	private SignInSheetTable signInSheetTable;
+	private JTable signInSheet;
+	private SignInSheetTableModel model;
+	private boolean stayAtBottom;
 	
 	public AdministratorPanel() {
 		super(new BorderLayout());
 		borderLayout = (BorderLayout) this.getLayout();
 		
 		font = new Font(this.getFont().getFontName(), this.getFont().getStyle(), 20);
-		
+		stayAtBottom = true;
 		
 		JPanel schedulePanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		schedulePanel.setBackground(Color.WHITE);
@@ -66,10 +73,11 @@ public class AdministratorPanel extends GPanel {
 		
 		signInSheetPanel.add(signInSheetBarPanel, BorderLayout.NORTH);
 		
-//		signInSheetTable = new SignInSheetTable();
-//		JScrollPane scrollPane = new JScrollPane(signInSheetTable);
-//		
-		//signInSheetPanel.add(scrollPane, BorderLayout.CENTER);
+		signInSheet = new JTable(new SignInSheetTableModel());
+		model = (SignInSheetTableModel) signInSheet.getModel();
+		JScrollPane scrollPane = new JScrollPane(signInSheet);
+		
+		signInSheetPanel.add(scrollPane, BorderLayout.CENTER);
 		
 		this.add(signInSheetPanel, BorderLayout.CENTER);
 		
@@ -81,8 +89,15 @@ public class AdministratorPanel extends GPanel {
 		return new Dimension(WIDTH, HEIGHT);
 	}
 
-//	public SignInSheetTable getSignInSheetTable(){
-//		return signInSheetTable;
-//	}
-//	
+	public SignInSheetTableModel getSignInSheetTableModel(){
+		return model;
+	}
+	
+	public void addStudent(Student s){
+		model.addStudent(s);
+		if(stayAtBottom){
+			signInSheet.scrollRectToVisible(signInSheet.getCellRect(signInSheet.getRowCount() - 1, 0, true));
+		}
+	}
+	
 }

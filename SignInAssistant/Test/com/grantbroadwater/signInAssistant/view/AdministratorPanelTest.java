@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 
 import org.junit.Test;
 
-
 import com.grantbroadwater.school.Student;
 //import com.grantbroadwater.signInAssistant.controller.AdminSignInListener;
 import com.grantbroadwater.signInAssistant.controller.Controller;
@@ -24,23 +23,26 @@ public class AdministratorPanelTest {
 //		AdminSignInListener listener = new AdminSignInListener(model, panel, controller);
 //		panel.setActionListener(listener);
 		
-		Student student = new Student("Grant", "Broadwater", "10101");
-		//panel.getSignInSheetTable().addStudent(student);
 		
 		JPanel[] panels = {panel};
 		String[] panelNames = {panel.getCardLayoutName()};
 		SIAFrame frame = new SIAFrame(panels, panelNames);
 		
-		//frame.setMaximumSize(panel.getPreferredSize());
+		frame.setMaximumSize(panel.getPreferredSize());
 		frame.setMinimumSize(panel.getPreferredSize());
 		frame.setVisible(true);
 		
-		try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Student student = new Student("Grant", "Broadwater", "10101");
+		for(int i=0; i<26; i++){
+			panel.addStudent(student);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {}
 		}
+		
+		try {
+			Thread.sleep(60000);
+		} catch (InterruptedException e) {}
 	}
 
 }

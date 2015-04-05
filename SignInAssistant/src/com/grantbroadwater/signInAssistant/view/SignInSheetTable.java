@@ -3,6 +3,8 @@ package com.grantbroadwater.signInAssistant.view;
 import javax.swing.JTable;
 
 import com.grantbroadwater.school.Student;
+import com.grantbroadwater.util.Log;
+import com.grantbroadwater.util.Log.LogType;
 
 public class SignInSheetTable extends JTable{
 
@@ -14,7 +16,7 @@ public class SignInSheetTable extends JTable{
 		model = (SignInSheetTableModel) super.getModel();
 		
 		this.setFillsViewportHeight(true);
-		
+		new Log(LogType.DEBUG, "new Sign In sheet");
 	}
 
 	public SignInSheetTableModel getModel() {
