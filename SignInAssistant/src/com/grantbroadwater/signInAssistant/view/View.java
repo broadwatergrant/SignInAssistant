@@ -38,6 +38,8 @@ public class View {
 				inquirePanel.getCardLayoutName()
 		};
 		
+		siaFrame.setPanels(panels, panelNames);
+		
 	}
 
 	public AdministratorPanel getAdministratorPanel() {

@@ -14,10 +14,17 @@ public class Controller {
 	Model model;
 	View view;
 	
+	
+	
 	public Controller(){
 		
 	}
 	
+	public Controller(Model model, View view) {
+		this.model = model;
+		this.view = view;
+	}
+
 	public void createModelAndView(){
 		model = new Model();
 		model.loadData();
@@ -33,11 +40,10 @@ public class Controller {
 		return this.view;
 	}
 	
-	public Controller(Model model, View view) {
-		this.model = model;
-		this.view = view;
+	public void startApplication(){
+		view.setSIAFrameVisible(true);
 	}
-
+	
 	protected void signInAdmin(Administrator admin){
 		System.out.println(admin.getFirstName() + " to be signed in");
 	}
