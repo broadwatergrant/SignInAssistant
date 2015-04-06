@@ -13,7 +13,7 @@ public class SIAMenuBar extends JMenuBar {
 
 	private JMenu signInAssistantMenu, showMenu;
 	private JMenuItem showInquire, showSignInSheet, showData;
-	private JMenuItem signOut, startStopSignIn, close;
+	private JMenuItem signOut, startStopSignIn, reselectPinTextField, close;
 	
 	public SIAMenuBar() {
 		super();
@@ -29,9 +29,12 @@ public class SIAMenuBar extends JMenuBar {
 		signOut = new JMenuItem("Sign Out");
 		signInAssistantMenu.add(signOut);
 		
+		reselectPinTextField = new JMenuItem("Reselect Pin");
+		signInAssistantMenu.add(reselectPinTextField);
+		
 		signInAssistantMenu.addSeparator();
 		
-		close = new JMenuItem("Close");
+		close = new JMenuItem("Close Sign In Assistant");
 		signInAssistantMenu.add(close);
 		
 		add(signInAssistantMenu);
@@ -63,6 +66,10 @@ public class SIAMenuBar extends JMenuBar {
 	
 	public void addSignOutSelectedFromMenuBarListener(ActionListener listener){
 		signOut.addActionListener(listener);
+	}
+	
+	public void addReselectPinSelectedFromMenuBarListener(ActionListener listener){
+		reselectPinTextField.addActionListener(listener);
 	}
 	
 	public void addCloseSelectedFromMenuBarListener(ActionListener listener){
