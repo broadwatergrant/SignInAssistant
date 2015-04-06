@@ -39,7 +39,7 @@ public class StudentPanel extends GPanel {
 		JPanel footer = new JPanel();
 		footer.setBackground(Color.WHITE);
 		JLabel lblCredits = new JLabel("Grant Broadwater");
-		lblCredits.setForeground(Color.GRAY);
+		lblCredits.setForeground(Color.LIGHT_GRAY);
 		footer.add(lblCredits);
 		
 		add(mainPanel, BorderLayout.CENTER);
