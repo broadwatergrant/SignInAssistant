@@ -156,4 +156,9 @@ public class StudentPanel extends GPanel {
 		lblDisplay.setForeground(Color.BLACK);
 	}
 	
+	public void refocus(){
+		this.requestFocus();
+		tfPin.requestFocus();
+	}
+	
 }

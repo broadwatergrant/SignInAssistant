@@ -89,4 +89,8 @@ public class Controller {
 		new SignInSheetSave(students);
 	}
 	
+	protected void closeApplication(){
+		
+	}
+	
 }
