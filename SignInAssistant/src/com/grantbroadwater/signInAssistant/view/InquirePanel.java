@@ -163,7 +163,10 @@ public class InquirePanel extends GPanel {
 	
 	public Student getSelectedStudent(){
 		int rowIndex = resultsTable.getSelectedRow();
-		return resultsTableModel.getStudentAt(rowIndex);
+		if(rowIndex != -1)
+			return resultsTableModel.getStudentAt(rowIndex);
+		else
+			return null;
 	}
 	
 	public void setResultsFromInquiry(ArrayList<Student> students){
