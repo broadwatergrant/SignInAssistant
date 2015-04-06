@@ -15,6 +15,7 @@ public class SignOutMenuBarListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		view.getSiaFrame().setSIAMenuBarVisibility(false);
 		view.showPanel(view.getAdministratorSignInPanel().getCardLayoutName());
 	}
 }

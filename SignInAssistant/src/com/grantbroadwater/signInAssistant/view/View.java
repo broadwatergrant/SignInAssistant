@@ -16,6 +16,7 @@ public class View {
 	private DataPanel dataPanel;
 	private InquirePanel inquirePanel;
 	private SIAFrame siaFrame;
+	private SIAMenuBar siaMenuBar;
 	private StudentFrame studentFrame;
 	private StudentPanel studentPanel;
 	
@@ -40,7 +41,7 @@ public class View {
 		
 		siaFrame = new SIAFrame();
 		siaFrame.setPanels(panels, panelNames);
-		
+		siaMenuBar = siaFrame.getSIAMenuBar();
 	}
 
 	public AdministratorPanel getAdministratorPanel() {
@@ -117,6 +118,10 @@ public class View {
 
 	public void setStudentFrameVisible(boolean value){
 		studentFrame.setVisible(value);
+	}
+	
+	public SIAMenuBar getSIAMenuBar(){
+		return siaMenuBar;
 	}
 	
 }

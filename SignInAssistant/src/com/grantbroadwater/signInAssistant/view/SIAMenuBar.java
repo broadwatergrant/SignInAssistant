@@ -1,5 +1,6 @@
 package com.grantbroadwater.signInAssistant.view;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -17,13 +18,15 @@ public class SIAMenuBar extends JMenuBar {
 	
 	public SIAMenuBar() {
 		super();
+		setBackground(Color.GRAY);
 		
 		signInAssistantMenu = new JMenu("Sign In Assistant");
+		signInAssistantMenu.setBackground(Color.GRAY);
 		signInAssistantMenu.setMnemonic(KeyEvent.VK_A);
 		signInAssistantMenu.getAccessibleContext().setAccessibleDescription(
 				"Main actions of the Sign In Assistant");
 		
-		startStopSignIn = new JMenuItem();
+		startStopSignIn = new JMenuItem("Start Sign In");
 		signInAssistantMenu.add(startStopSignIn);
 		
 		signOut = new JMenuItem("Sign Out");
@@ -40,6 +43,7 @@ public class SIAMenuBar extends JMenuBar {
 		add(signInAssistantMenu);
 		
 		showMenu = new JMenu("Show");
+		showMenu.setBackground(Color.GRAY);
 		showMenu.setMnemonic(KeyEvent.VK_S);
 		showMenu.getAccessibleContext().setAccessibleDescription(
 				"Select which Screen to show");
@@ -56,7 +60,7 @@ public class SIAMenuBar extends JMenuBar {
 		add(showMenu);
 	}
 
-	public void setStartStopSignInTest(String text){
+	public void setStartStopSignInText(String text){
 		startStopSignIn.setText(text);
 	}
 	

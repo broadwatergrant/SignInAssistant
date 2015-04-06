@@ -24,7 +24,7 @@ public class AdministratorPanelTest {
 		
 		AdministratorPanel panel = new AdministratorPanel(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
 		
-		AdminStartSignInListener listener = new AdminStartSignInListener(model, panel, controller);
+		AdminStartSignInListener listener = new AdminStartSignInListener(controller);
 		panel.addStartActionListener(listener);
 		
 		AdminSaveActionListener saveListener = new AdminSaveActionListener(model, controller);

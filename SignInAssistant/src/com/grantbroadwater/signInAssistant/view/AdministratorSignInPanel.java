@@ -134,6 +134,11 @@ public class AdministratorSignInPanel extends GPanel {
 		btnSignIn.addActionListener(listener);
 	}
 
+	public void clearTextFields(){
+		tfName.setText("");
+		tfPin.setText("");
+	}
+	
 	public String getName() {
 		return tfName.getText();
 	}

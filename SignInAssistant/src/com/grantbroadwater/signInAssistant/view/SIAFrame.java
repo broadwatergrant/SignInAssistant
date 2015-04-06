@@ -17,6 +17,7 @@ public class SIAFrame extends JFrame {
 	private CardLayout cardLayout;
 	private String[] panelNames;
 	private JPanel[] panels;
+	private SIAMenuBar siaMenuBar;
 	
 	public SIAFrame(){
 		super("Sign In Assistant");
@@ -25,6 +26,8 @@ public class SIAFrame extends JFrame {
 		cardLayout = new CardLayout();
 		contentPane = new JPanel(cardLayout);
 		this.getContentPane().add(contentPane);
+		
+		siaMenuBar = new SIAMenuBar();
 	}
 	
 	public SIAFrame(JPanel[] panels, String[] panelNames) throws HeadlessException {
@@ -59,5 +62,16 @@ public class SIAFrame extends JFrame {
 				return i;
 		}
 		return -1;
+	}
+	
+	public SIAMenuBar getSIAMenuBar(){
+		return siaMenuBar;
+	}
+	
+	public void setSIAMenuBarVisibility(boolean value){
+		if(value)
+			setJMenuBar(siaMenuBar);
+		else
+			setJMenuBar(null);
 	}
 }

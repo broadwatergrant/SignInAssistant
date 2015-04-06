@@ -20,14 +20,7 @@ public class SignInMenuBarListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(view.getStudentFrame().isVisible())
-			controller.stopStudentSignIn();
-		else
-			controller.startStudentSignIn(
-					model.getScheduleWithName(
-							view.getAdministratorPanel().getSelectedScheduleName()
-					)
-			);
+		controller.adminClickedStartStop();
 	}
 
 }

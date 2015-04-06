@@ -136,4 +136,8 @@ public class AdministratorPanel extends GPanel {
 		JOptionPane.showMessageDialog(this, message);
 	}
 	
+	public void setStartStopButtonText(String text){
+		btnStart.setText(text);
+	}
+	
 }
