@@ -38,6 +38,7 @@ public class Model {
 	public Model() {
 		studentBody = new Students();
 		administration = new Administrators();
+		signInSheet = new SignInSheet();
 	}
 
 	public BellSchedule getSelectedSchedule() {

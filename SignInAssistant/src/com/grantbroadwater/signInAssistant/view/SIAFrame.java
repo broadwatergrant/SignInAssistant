@@ -16,6 +16,7 @@ public class SIAFrame extends JFrame {
 	private JPanel contentPane;
 	private CardLayout cardLayout;
 	private String[] panelNames;
+	private JPanel[] panels;
 	
 	public SIAFrame(){
 		super("Sign In Assistant");
@@ -32,6 +33,7 @@ public class SIAFrame extends JFrame {
 	}
 	
 	public void setPanels(JPanel[] panels, String[] panelNames){
+		this.panels = panels;
 		this.panelNames = panelNames;
 		
 		for (int i = 0; i < panels.length; i++) {
@@ -44,7 +46,18 @@ public class SIAFrame extends JFrame {
 	}
 	
 	public void showPanel(String panelName){
+		JPanel newPanel = panels[getIndexOf(panelName)];
+		this.setMinimumSize(newPanel.getPreferredSize());
+		this.setMaximumSize(newPanel.getPreferredSize());
+		
 		cardLayout.show(contentPane, panelName);
 	}
-
+	
+	private int getIndexOf(String name){
+		for(int i=0; i<panelNames.length; i++){
+			if(panelNames[i].equalsIgnoreCase(name))
+				return i;
+		}
+		return -1;
+	}
 }

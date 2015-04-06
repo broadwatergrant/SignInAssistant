@@ -8,6 +8,7 @@ import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
 import com.grantbroadwater.signInAssistant.model.Model;
 import com.grantbroadwater.signInAssistant.view.View;
+import com.grantbroadwater.util.Log;
 
 public class Controller {
 
@@ -53,6 +54,7 @@ public class Controller {
 	}
 	
 	public void startApplication(){
+		view.showPanel(view.getAdministratorSignInPanel().getCardLayoutName());
 		view.setSIAFrameVisible(true);
 	}
 	
@@ -68,19 +70,20 @@ public class Controller {
 	/* ----- Behaviors too large to be handled by listeners ----- */
 	
 	protected void signInAdmin(Administrator admin){
-		System.out.println(admin.getFirstName() + " to be signed in");
+		view.showPanel(view.getAdministratorPanel().getCardLayoutName());
 	}
 	
 	protected void punchStudent(Student student){
-		System.out.println(student.getFirstName() + " to be punched");
+		model.getSignInSheet().punchStudent(student);
+		view.getAdministratorPanel().updateSignInSheet(student);
 	}
 	
 	protected void startStudentSignIn(BellSchedule schedule){
-		System.out.println("Starting sign in with schedule: "+schedule.getName());
+		view.setStudentFrameVisible(true);
 	}
 	
 	protected void stopStudentSignIn(){
-		System.out.println("Now closing student sign in");
+		view.setStudentFrameVisible(false);
 	}
 	
 	protected void saveSignInSheet(){

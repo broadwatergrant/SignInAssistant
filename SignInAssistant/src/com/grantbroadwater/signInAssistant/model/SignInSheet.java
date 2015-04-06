@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 
 import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
+import com.grantbroadwater.util.Log;
 
 public class SignInSheet {
 
@@ -17,18 +18,21 @@ public class SignInSheet {
 	public void signStudentIn(Student s){
 		list.add(s);
 		s.setTimeIn(new GregorianCalendar());
+		s.setTimeOut(null);
 		s.setStatus(Status.IN);
+		new Log(Log.LogType.DEBUG, s.getName() + " is now signed " + s.getStatus());
 	}
 	
 	public void signStudentOut(Student s){
 		s.setTimeOut(new GregorianCalendar());
 		s.setStatus(Status.OUT);
+		new Log(Log.LogType.DEBUG, s.getName() + " is now signed " + s.getStatus());
 	}
 	
 	public void punchStudent(Student s){
 		if(s.getStatus() == Status.IN)
 			signStudentOut(s);
-		if(s.getStatus() == Status.OUT)
+		else if(s.getStatus() == Status.OUT)
 			signStudentIn(s);
 	}
 	

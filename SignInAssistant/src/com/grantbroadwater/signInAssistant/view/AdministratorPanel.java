@@ -16,12 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.grantbroadwater.school.BellSchedule;
+import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
+import com.grantbroadwater.util.Log;
+import com.grantbroadwater.util.Log.LogType;
 
 public class AdministratorPanel extends GPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 800, HEIGHT = 600;
+	public static final int WIDTH = 600, HEIGHT = 400;
 
 	@SuppressWarnings("unused")
 	private BorderLayout borderLayout;
@@ -96,9 +99,6 @@ public class AdministratorPanel extends GPanel {
 		return new Dimension(WIDTH, HEIGHT);
 	}
 
-//	public SignInSheetTableModel getSignInSheetTableModel(){
-//		return model;
-//	}
 	
 	public void signStudentIn(Student s){
 		signInSheet.signStudentIn(s);
@@ -109,6 +109,13 @@ public class AdministratorPanel extends GPanel {
 	
 	public void signStudentOut(Student s){
 		signInSheet.signStudentOut(s);
+	}
+	
+	public void updateSignInSheet(Student s){
+		if(s.getStatus() == Status.OUT) // Student just now signed out
+			signStudentOut(s);
+		else if(s.getStatus() == Status.IN) // Student just now signed in
+			signStudentIn(s);
 	}
 	
 	public String getSelectedScheduleName(){
@@ -125,6 +132,7 @@ public class AdministratorPanel extends GPanel {
 	
 	public void addSaveActionListener(ActionListener listener){
 		btnSave.addActionListener(listener);
+		new Log(LogType.DEBUG, "Action listener attacted");
 	}
 	
 	public void ShowMessageDialog(String message){

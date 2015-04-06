@@ -38,6 +38,7 @@ public class View {
 				inquirePanel.getCardLayoutName()
 		};
 		
+		siaFrame = new SIAFrame();
 		siaFrame.setPanels(panels, panelNames);
 		
 	}
