@@ -33,6 +33,8 @@ public class Controller {
 	SignInSheetMenuBarListener signInSheetMenuBarListener;
 	DataMenuBarListener dataMenuBarListener;
 	
+	SIAKeyListener siaKeyListener;
+	
 	public Controller(){
 		
 	}
@@ -60,6 +62,10 @@ public class Controller {
 		view.addInquirePanelListSelectionListener(inquireListSelectionListener);
 		view.addStudentPanelDocumentListener(studentPinDocumnetListener);
 		view.addStudentPanelConfirmListener(studentSignInActionListener);
+		
+		siaKeyListener = new SIAKeyListener(this);
+		view.getSiaFrame().addKeyListener(siaKeyListener);
+		view.getAdministratorPanel().addKeyListener(siaKeyListener);
 		
 		/* ----- Menu Bar Listeners ----- */
 		
@@ -133,6 +139,10 @@ public class Controller {
 	
 	protected void saveSignInSheet(Student[] students){
 		new SignInSheetSave(students);
+	}
+	
+	protected void reselectPin(){
+		view.getStudentPanel().refocus();
 	}
 	
 	protected void closeApplication(){
