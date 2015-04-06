@@ -1,5 +1,8 @@
 package com.grantbroadwater.signInAssistant.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
@@ -13,6 +16,21 @@ public class Controller {
 	
 	public Controller(){
 		
+	}
+	
+	public void createModelAndView(){
+		model = new Model();
+		model.loadData();
+		
+		view = new View(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
+	}
+	
+	public Model getModel(){
+		return model;
+	}
+	
+	public View getView(){
+		return this.view;
 	}
 	
 	public Controller(Model model, View view) {

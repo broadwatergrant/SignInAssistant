@@ -3,6 +3,7 @@ package com.grantbroadwater.signInAssistant.view;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionListener;
 
@@ -25,6 +26,18 @@ public class View {
 		inquirePanel = new InquirePanel();
 		studentFrame = new StudentFrame();
 		studentPanel = studentFrame.getStudentPanel();
+		
+		JPanel[] panels = {
+				administratorPanel, administratorSignInPanel,
+				dataPanel, inquirePanel
+		};
+		String[] panelNames = {
+				administratorPanel.getCardLayoutName(),
+				administratorSignInPanel.getCardLayoutName(),
+				dataPanel.getCardLayoutName(),
+				inquirePanel.getCardLayoutName()
+		};
+		
 	}
 
 	public AdministratorPanel getAdministratorPanel() {
@@ -89,6 +102,18 @@ public class View {
 
 	public void addStudentPanelDocumentListener(DocumentListener listener) {
 		studentPanel.addStudentPanelDocumentListener(listener);
+	}
+
+	public void showPanel(String panelName) {
+		siaFrame.showPanel(panelName);
+	}
+	
+	public void setSIAFrameVisible(boolean value){
+		siaFrame.setVisible(value);
+	}
+
+	public void setStudentFrameVisible(boolean value){
+		studentFrame.setVisible(value);
 	}
 	
 }
