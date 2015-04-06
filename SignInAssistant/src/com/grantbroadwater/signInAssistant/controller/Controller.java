@@ -8,7 +8,6 @@ import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
 import com.grantbroadwater.signInAssistant.model.Model;
 import com.grantbroadwater.signInAssistant.view.View;
-import com.grantbroadwater.util.Log;
 
 public class Controller {
 
@@ -43,7 +42,7 @@ public class Controller {
 		studentPinDocumnetListener = new StudentPinDocumentListener(model, view.getStudentPanel());
 		studentSignInActionListener = new StudentSignInActionListener(model, view.getStudentPanel(), this);
 	
-		view.addSaveActionListener(adminSignInListener);
+		view.addSaveActionListener(adminSaveActionListern);
 		view.addSignInActionListener(adminSignInListener);
 		view.addStartActionListener(adminStartSignInListener);
 		view.addDataPanelDocumentListener(dataDocumentListener);

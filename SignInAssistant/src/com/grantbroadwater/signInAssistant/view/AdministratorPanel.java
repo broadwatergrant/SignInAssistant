@@ -18,8 +18,6 @@ import javax.swing.JScrollPane;
 import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
-import com.grantbroadwater.util.Log;
-import com.grantbroadwater.util.Log.LogType;
 
 public class AdministratorPanel extends GPanel {
 	
@@ -132,7 +130,6 @@ public class AdministratorPanel extends GPanel {
 	
 	public void addSaveActionListener(ActionListener listener){
 		btnSave.addActionListener(listener);
-		new Log(LogType.DEBUG, "Action listener attacted");
 	}
 	
 	public void ShowMessageDialog(String message){
