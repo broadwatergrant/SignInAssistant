@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Student;
+import com.grantbroadwater.signInAssistant.controller.AdminStartSignInListener;
 //import com.grantbroadwater.signInAssistant.controller.AdminSignInListener;
 import com.grantbroadwater.signInAssistant.controller.Controller;
 import com.grantbroadwater.signInAssistant.model.Model;
@@ -20,13 +21,13 @@ public class AdministratorPanelTest {
 		Model model = new Model();
 		model.loadData();
 		
-		@SuppressWarnings("unused")
 		Controller controller = new Controller();
 		
 		AdministratorPanel panel = new AdministratorPanel(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
 		// TODO: add save action listener
-		// TODO: add start action listener
 		
+		AdminStartSignInListener listener = new AdminStartSignInListener(model, panel, controller);
+		panel.addStartActionListener(listener);
 		
 		JPanel[] panels = {panel};
 		String[] panelNames = {panel.getCardLayoutName()};
@@ -35,14 +36,6 @@ public class AdministratorPanelTest {
 		frame.setMaximumSize(panel.getPreferredSize());
 		frame.setMinimumSize(panel.getPreferredSize());
 		frame.setVisible(true);
-		
-		Student student = new Student("Grant", "Broadwater", "10101");
-		for(int i=0; i<26; i++){
-			panel.signStudentIn(student);
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {}
-		}
 		
 		try {
 			Thread.sleep(60000);

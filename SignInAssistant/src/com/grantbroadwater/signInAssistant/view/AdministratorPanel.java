@@ -115,6 +115,10 @@ public class AdministratorPanel extends GPanel {
 		return (String)cbSchedule.getSelectedItem();
 	}
 	
+	public void setScheduleComboBoxEnabled(boolean value){
+		cbSchedule.setEnabled(value);
+	}
+	
 	public void addStartActionListener(ActionListener listener){
 		btnStart.addActionListener(listener);
 	}

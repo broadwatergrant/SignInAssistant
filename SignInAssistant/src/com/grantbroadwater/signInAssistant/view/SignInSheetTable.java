@@ -16,7 +16,6 @@ public class SignInSheetTable extends JTable{
 		model = (SignInSheetTableModel) super.getModel();
 		
 		this.setFillsViewportHeight(true);
-		new Log(LogType.DEBUG, "new Sign In sheet");
 	}
 
 	public void signStudentIn(Student student) {

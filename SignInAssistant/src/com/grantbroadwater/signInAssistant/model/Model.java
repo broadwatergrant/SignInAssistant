@@ -24,6 +24,7 @@ public class Model {
 	private Students studentBody;
 	private Administrators administration;
 	private BellSchedule[] schedules;
+	private BellSchedule selectedSchedule;
 	private SignInSheet signInSheet;
 	
 	private File excelFile, excelFileLocation;
@@ -39,6 +40,21 @@ public class Model {
 		administration = new Administrators();
 	}
 
+	public BellSchedule getSelectedSchedule() {
+		return selectedSchedule;
+	}
+
+	public void setSelectedSchedule(BellSchedule selectedSchedule) {
+		this.selectedSchedule = selectedSchedule;
+	}
+
+	public BellSchedule getScheduleWithName(String scheduleName){
+		for(BellSchedule schedule : schedules)
+			if(schedule.getName().equalsIgnoreCase(scheduleName))
+				return schedule;
+		return null;
+	}
+	
 	public void loadData() {
 		loadReferenceData();
 		loadApplicationData();
