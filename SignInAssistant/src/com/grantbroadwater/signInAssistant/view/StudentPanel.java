@@ -128,11 +128,11 @@ public class StudentPanel extends GPanel {
 		tfPin.setText("");
 	}
 	
-	public void addConfirmListener(ActionListener listener){
+	public void addStudentPanelConfirmListener(ActionListener listener){
 		tfPin.addActionListener(listener);
 	}
 	
-	public void addDocumentListener(DocumentListener listener){
+	public void addStudentPanelDocumentListener(DocumentListener listener){
 		tfPin.getDocument().addDocumentListener(listener);
 	}
 	

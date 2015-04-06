@@ -27,7 +27,7 @@ public class DataPanelTest {
 		frame.setMaximumSize(panel.getPreferredSize());
 	
 		DataDocumentListener listener = new DataDocumentListener(model, panel);
-		panel.addDocumentListener(listener);
+		panel.addDataPanelDocumentListener(listener);
 		
 		frame.setVisible(true);
 		

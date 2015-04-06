@@ -21,10 +21,10 @@ public class StudentViewTest {
 		StudentPanel studentPanel = frame.getStudentPanel();
 		
 		StudentSignInActionListener listener = new StudentSignInActionListener(model, studentPanel, controller);
-		studentPanel.addConfirmListener(listener);
+		studentPanel.addStudentPanelConfirmListener(listener);
 		
 		StudentPinDocumentListener documentListener = new StudentPinDocumentListener(model, studentPanel);
-		studentPanel.addDocumentListener(documentListener);
+		studentPanel.addStudentPanelDocumentListener(documentListener);
 		
 		frame.setVisible(true);
 		

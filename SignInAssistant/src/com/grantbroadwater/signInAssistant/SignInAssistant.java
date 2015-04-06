@@ -11,9 +11,9 @@ public class SignInAssistant {
 	private static Controller controller;
 	
 	public static void main(String[] args) {
-		model = new Model();
-		view = new View();
-		controller = new Controller();
+//		model = new Model();
+//		view = new View();
+//		controller = new Controller();
 	}
 
 	public static Model getModel() {

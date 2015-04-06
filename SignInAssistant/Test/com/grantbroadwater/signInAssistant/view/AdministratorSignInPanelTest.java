@@ -19,7 +19,7 @@ public class AdministratorSignInPanelTest {
 		
 		AdministratorSignInPanel panel = new AdministratorSignInPanel();
 		AdminSignInListener listener = new AdminSignInListener(model, panel, controller);
-		panel.setActionListener(listener);
+		panel.addSignInActionListener(listener);
 		
 		JPanel[] panels = {panel};
 		String[] panelNames = {panel.getCardLayoutName()};

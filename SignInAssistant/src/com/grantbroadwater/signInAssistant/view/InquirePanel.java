@@ -173,13 +173,13 @@ public class InquirePanel extends GPanel {
 		resultsTableModel.setResults(students);
 	}
 	
-	public void addDocumentListener(DocumentListener listener){
+	public void addInquirePanelDocumentListener(DocumentListener listener){
 		tfPin.getDocument().addDocumentListener(listener);
 		tfFirst.getDocument().addDocumentListener(listener);
 		tfLast.getDocument().addDocumentListener(listener);
 	}
 	
-	public void addListSelectionListener(ListSelectionListener listener){
+	public void addInquirePanelListSelectionListener(ListSelectionListener listener){
 		resultsTable.getSelectionModel().addListSelectionListener(listener);
 	}
 	

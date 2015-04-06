@@ -148,7 +148,7 @@ public class DataPanel extends GPanel {
 		JOptionPane.showMessageDialog(this, message);
 	}
 
-	public void addDocumentListener(DocumentListener listener) {
+	public void addDataPanelDocumentListener(DocumentListener listener) {
 		tfPin.getDocument().addDocumentListener(listener);
 		tfFirst.getDocument().addDocumentListener(listener);
 		tfLast.getDocument().addDocumentListener(listener);

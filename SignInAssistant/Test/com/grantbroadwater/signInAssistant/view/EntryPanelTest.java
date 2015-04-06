@@ -20,10 +20,10 @@ public class EntryPanelTest {
 		InquirePanel inquirePanel = new InquirePanel();
 		
 		InquireDocumentListener documentListener = new InquireDocumentListener(model, inquirePanel);
-		inquirePanel.addDocumentListener(documentListener);
+		inquirePanel.addInquirePanelDocumentListener(documentListener);
 		
 		InquireListSelectionListener listSelectionListener = new InquireListSelectionListener(model, inquirePanel);
-		inquirePanel.addListSelectionListener(listSelectionListener);
+		inquirePanel.addInquirePanelListSelectionListener(listSelectionListener);
 		
 		JPanel[] panels = {inquirePanel};
 		String[] panelNames = {inquirePanel.getCardLayoutName()};
