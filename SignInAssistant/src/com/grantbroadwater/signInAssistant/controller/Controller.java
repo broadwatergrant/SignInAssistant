@@ -14,15 +14,17 @@ public class Controller {
 	Model model;
 	View view;
 	
-	
+	AdminSaveActionListener adminSaveActionListern;
+	AdminSignInListener adminSignInListener;
+	AdminStartSignInListener adminStartSignInListener;
+	DataDocumentListener dataDocumentListener;
+	InquireDocumentListener inquireDocumentListener;
+	InquireListSelectionListener inquireListSelectionListener;
+	StudentPinDocumentListener studentPinDocumnetListener;
+	StudentSignInActionListener studentSignInActionListener;
 	
 	public Controller(){
 		
-	}
-	
-	public Controller(Model model, View view) {
-		this.model = model;
-		this.view = view;
 	}
 
 	public void createModelAndView(){
@@ -30,6 +32,28 @@ public class Controller {
 		model.loadData();
 		
 		view = new View(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
+		
+		adminSaveActionListern = new AdminSaveActionListener(this);
+		adminSignInListener = new AdminSignInListener(model, view.getAdministratorSignInPanel(), this);
+		adminStartSignInListener = new AdminStartSignInListener(model, view.getAdministratorPanel(), this);
+		dataDocumentListener = new DataDocumentListener(model, view.getDataPanel());
+		inquireDocumentListener = new InquireDocumentListener(model, view.getInquirePanel());
+		inquireListSelectionListener = new InquireListSelectionListener(model, view.getInquirePanel());
+		studentPinDocumnetListener = new StudentPinDocumentListener(model, view.getStudentPanel());
+		studentSignInActionListener = new StudentSignInActionListener(model, view.getStudentPanel(), this);
+	
+		view.addSaveActionListener(adminSignInListener);
+		view.addSignInActionListener(adminSignInListener);
+		view.addStartActionListener(adminStartSignInListener);
+		view.addDataPanelDocumentListener(dataDocumentListener);
+		view.addInquirePanelDocumentListener(inquireDocumentListener);
+		view.addInquirePanelListSelectionListener(inquireListSelectionListener);
+		view.addStudentPanelDocumentListener(studentPinDocumnetListener);
+		view.addStudentPanelConfirmListener(studentSignInActionListener);
+	}
+	
+	public void startApplication(){
+		view.setSIAFrameVisible(true);
 	}
 	
 	public Model getModel(){
@@ -40,9 +64,8 @@ public class Controller {
 		return this.view;
 	}
 	
-	public void startApplication(){
-		view.setSIAFrameVisible(true);
-	}
+	
+	/* ----- Behaviors too large to be handled by listeners ----- */
 	
 	protected void signInAdmin(Administrator admin){
 		System.out.println(admin.getFirstName() + " to be signed in");
