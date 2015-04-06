@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import org.junit.Test;
 
+import com.grantbroadwater.signInAssistant.controller.InquireDocumentListener;
 import com.grantbroadwater.signInAssistant.model.Model;
 
 public class EntryPanelTest {
@@ -16,6 +17,9 @@ public class EntryPanelTest {
 		SIAFrame frame = new SIAFrame();
 		
 		InquirePanel inquirePanel = new InquirePanel();
+		
+		InquireDocumentListener documentListener = new InquireDocumentListener(model, inquirePanel);
+		inquirePanel.addDocumentListener(documentListener);
 		
 		JPanel[] panels = {inquirePanel};
 		String[] panelNames = {inquirePanel.getCardLayoutName()};
