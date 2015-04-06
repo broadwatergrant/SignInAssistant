@@ -33,7 +33,7 @@ public class Controller {
 		
 		view = new View(new ArrayList<BellSchedule>(Arrays.asList(model.getSchedules())));
 		
-		adminSaveActionListern = new AdminSaveActionListener(this);
+		adminSaveActionListern = new AdminSaveActionListener(model, this);
 		adminSignInListener = new AdminSignInListener(model, view.getAdministratorSignInPanel(), this);
 		adminStartSignInListener = new AdminStartSignInListener(model, view.getAdministratorPanel(), this);
 		dataDocumentListener = new DataDocumentListener(model, view.getDataPanel());
@@ -85,8 +85,8 @@ public class Controller {
 		view.setStudentFrameVisible(false);
 	}
 	
-	protected void saveSignInSheet(){
-		System.out.println("Save the sign in sheet");
+	protected void saveSignInSheet(Student[] students){
+		new SignInSheetSave(students);
 	}
 	
 }

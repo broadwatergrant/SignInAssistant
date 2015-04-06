@@ -27,7 +27,7 @@ public class AdministratorPanelTest {
 		AdminStartSignInListener listener = new AdminStartSignInListener(model, panel, controller);
 		panel.addStartActionListener(listener);
 		
-		AdminSaveActionListener saveListener = new AdminSaveActionListener(controller);
+		AdminSaveActionListener saveListener = new AdminSaveActionListener(model, controller);
 		panel.addSaveActionListener(saveListener);
 		
 		JPanel[] panels = {panel};

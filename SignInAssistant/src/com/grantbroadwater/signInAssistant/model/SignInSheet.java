@@ -14,16 +14,23 @@ public class SignInSheet {
 		list = new ArrayList<Student>();
 	}
 	
-	public void signStudentIn(Student s){
+	private void signStudentIn(Student s){
 		list.add(s);
 		s.setTimeIn(new GregorianCalendar());
 		s.setTimeOut(null);
 		s.setStatus(Status.IN);
 	}
 	
-	public void signStudentOut(Student s){
-		s.setTimeOut(new GregorianCalendar());
-		s.setStatus(Status.OUT);
+	private void signStudentOut(Student s){
+		for(int i=list.size() - 1; i >= 0; i--){
+			if(list.get(i).essentialyEquals(s)){
+				list.get(i).setTimeOut(new GregorianCalendar());
+				list.get(i).setStatus(Status.OUT);
+				s.setTimeOut(new GregorianCalendar());
+				s.setStatus(Status.OUT);
+				return;
+			}
+		}
 	}
 	
 	public void punchStudent(Student s){
