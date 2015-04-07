@@ -355,8 +355,8 @@ public class Model {
 		}
 		
 		for(int i=0; i<selectedSchedule.size(); i++){
-			ClassPeriod cp = selectedSchedule.get(0);
-			if(now.compareTo(cp.getStop()) < 0)
+			ClassPeriod cp = selectedSchedule.get(i);
+			if(compare(cp.getStop(), now) > 0)
 				return i + 1;
 		}
 		

@@ -17,6 +17,15 @@ public class Student extends Person {
 		this.setStatus(Status.OUT);
 	}
 
+	public Student(Student copy){
+		super(copy.getFirstName(), copy.getLastName(), copy.getPin());
+		this.setGradeLevel(copy.getGradeLevel());
+		this.setStatus(copy.getStatus());
+		this.setTimeIn(copy.getTimeIn());
+		this.setTimeOut(copy.getTimeOut());
+		this.setAutoSignedOut(copy.isAutoSignedOut());
+	}
+	
 	public Student(String firstName, String lastName, String pin) {
 		super(firstName, lastName, pin);
 		this.setGradeLevel(0);

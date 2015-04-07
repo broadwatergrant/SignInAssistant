@@ -15,10 +15,17 @@ public class SignInSheet {
 	}
 	
 	private void signStudentIn(Student s){
-		list.add(s);
 		s.setTimeIn(new GregorianCalendar());
 		s.setTimeOut(null);
+		s.setAutoSignedOut(false);
 		s.setStatus(Status.IN);
+		
+		Student listStudent = new Student(s);
+		listStudent.setTimeIn(new GregorianCalendar());
+		listStudent.setTimeOut(null);
+		listStudent.setAutoSignedOut(false);
+		listStudent.setStatus(Status.IN);
+		list.add(listStudent);
 	}
 	
 	private void signStudentOut(Student s){
@@ -26,6 +33,7 @@ public class SignInSheet {
 			if(list.get(i).essentialyEquals(s)){
 				list.get(i).setTimeOut(new GregorianCalendar());
 				list.get(i).setStatus(Status.OUT);
+				
 				s.setTimeOut(new GregorianCalendar());
 				s.setStatus(Status.OUT);
 				return;
@@ -46,6 +54,7 @@ public class SignInSheet {
 				list.get(i).setTimeOut(new GregorianCalendar());
 				list.get(i).setStatus(Status.OUT);
 				list.get(i).setAutoSignedOut(true);
+				
 				s.setTimeOut(new GregorianCalendar());
 				s.setStatus(Status.OUT);
 				s.setAutoSignedOut(true);

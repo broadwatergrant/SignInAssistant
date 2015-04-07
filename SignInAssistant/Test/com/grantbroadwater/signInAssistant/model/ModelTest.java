@@ -45,7 +45,7 @@ public class ModelTest {
 		model = new Model();
 		model.loadData();
 		
-		BellSchedule schedule = model.getScheduleWithName("A Day");
+		BellSchedule schedule = model.getScheduleWithName("Custom Day");
 		model.setSelectedSchedule(schedule);
 		int result = model.getCurrentHour();
 		

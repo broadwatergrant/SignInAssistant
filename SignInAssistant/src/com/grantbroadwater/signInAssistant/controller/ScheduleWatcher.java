@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.grantbroadwater.signInAssistant.model.Model;
+import com.grantbroadwater.util.Log;
 
 public class ScheduleWatcher extends Timer {
 
@@ -28,10 +29,6 @@ public class ScheduleWatcher extends Timer {
 		gc.set(Calendar.SECOND, 0);
 		gc.set(Calendar.MILLISECOND, 0);
 		Date date = gc.getTime();
-		System.out.println(gc.get(Calendar.HOUR) 
-				+ ":" + gc.get(Calendar.MINUTE) 
-				+ ":" + gc.get(Calendar.SECOND)
-				+ ":" + gc.get(Calendar.MILLISECOND));
 		
 		schedule(watchScheduleTask, date, 60000);
 	}
@@ -51,6 +48,7 @@ class WatchScheduleTask extends TimerTask{
 	
 	@Override
 	public void run() {
+		new Log(Log.LogType.DEBUG, "Here: "+currentHour+" model: "+model.getCurrentHour());
 		if(currentHour != model.getCurrentHour()){
 			controller.autoSignOutStudents();
 			currentHour = model.getCurrentHour();
