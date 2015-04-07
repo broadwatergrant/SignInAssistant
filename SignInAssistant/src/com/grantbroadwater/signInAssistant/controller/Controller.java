@@ -160,7 +160,7 @@ public class Controller {
 	protected void autoSignOutStudents(){
 		for(Student s : model.getSignInSheet().getSignInSheet())
 			if(s.getStatus() == Status.IN)
-				autoSignOutStudent(s);
+				this.autoSignOutStudent(s);
 	}
 	
 	private void autoSignOutStudent(Student s){
