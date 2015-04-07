@@ -35,6 +35,8 @@ public class Controller {
 	
 	SIAKeyListener siaKeyListener;
 	
+	ScheduleWatcher scheduleWatcher;
+	
 	public Controller(){
 		
 	}
@@ -66,6 +68,8 @@ public class Controller {
 		siaKeyListener = new SIAKeyListener(this);
 		view.getSiaFrame().addKeyListener(siaKeyListener);
 		view.getAdministratorPanel().addKeyListener(siaKeyListener);
+		
+		scheduleWatcher = new ScheduleWatcher(model, this);
 		
 		/* ----- Menu Bar Listeners ----- */
 		
@@ -129,12 +133,19 @@ public class Controller {
 		view.setStudentFrameVisible(true);
 		view.getSIAMenuBar().setStartStopSignInText("Stop Sign In");
 		view.getAdministratorPanel().setStartStopButtonText("Stop");
+		model.setSelectedSchedule(
+				model.getScheduleWithName(
+						view.getAdministratorPanel().getSelectedScheduleName()));
+		scheduleWatcher.startWatchingSchedule();
 	}
 	
 	protected void stopStudentSignIn(){
 		view.setStudentFrameVisible(false);
 		view.getSIAMenuBar().setStartStopSignInText("Start Sign In");
 		view.getAdministratorPanel().setStartStopButtonText("Start");
+		model.setSelectedSchedule(null);
+		scheduleWatcher.cancel();
+		scheduleWatcher = new ScheduleWatcher(model, this);
 	}
 	
 	protected void saveSignInSheet(Student[] students){
@@ -143,6 +154,10 @@ public class Controller {
 	
 	protected void reselectPin(){
 		view.getStudentPanel().refocus();
+	}
+	
+	protected void autoSignOutStudents(){
+		System.out.println("Auto signing out students");
 	}
 	
 	protected void closeApplication(){
