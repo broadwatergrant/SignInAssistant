@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.BellSchedule;
+import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
 import com.grantbroadwater.signInAssistant.model.Model;
 import com.grantbroadwater.signInAssistant.view.AdministratorPanel;
@@ -157,7 +158,14 @@ public class Controller {
 	}
 	
 	protected void autoSignOutStudents(){
-		System.out.println("Auto signing out students");
+		for(Student s : model.getSignInSheet().getSignInSheet())
+			if(s.getStatus() == Status.IN)
+				autoSignOutStudent(s);
+	}
+	
+	private void autoSignOutStudent(Student s){
+		model.getSignInSheet().autoSignStudentOut(s);
+		view.getAdministratorPanel().updateSignInSheet(s);
 	}
 	
 	protected void closeApplication(){

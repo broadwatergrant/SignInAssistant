@@ -40,6 +40,20 @@ public class SignInSheet {
 			signStudentIn(s);
 	}
 	
+	public void autoSignStudentOut(Student s){
+		for(int i=list.size() - 1; i >= 0; i--){
+			if(list.get(i).essentialyEquals(s)){
+				list.get(i).setTimeOut(new GregorianCalendar());
+				list.get(i).setStatus(Status.OUT);
+				list.get(i).setAutoSignedOut(true);
+				s.setTimeOut(new GregorianCalendar());
+				s.setStatus(Status.OUT);
+				s.setAutoSignedOut(true);
+				return;
+			}
+		}
+	}
+	
 	public Student[] getSignInSheet(){
 		return list.toArray(new Student[list.size()]);
 	}
