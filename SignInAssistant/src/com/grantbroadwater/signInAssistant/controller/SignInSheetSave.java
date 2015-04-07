@@ -10,7 +10,7 @@ public class SignInSheetSave {
 
 	private SignInSheetExcelWriter writer;
 	
-	public SignInSheetSave(Student[] students) {
+	public SignInSheetSave(Student[] students, Integer[] parrallelClasses) {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		
@@ -34,7 +34,7 @@ public class SignInSheetSave {
 		}while(userInput == null);
 		
 		writer = new SignInSheetExcelWriter();
-		writer.write(userInput, students);
+		writer.write(userInput, students, parrallelClasses);
 		
 	}
 

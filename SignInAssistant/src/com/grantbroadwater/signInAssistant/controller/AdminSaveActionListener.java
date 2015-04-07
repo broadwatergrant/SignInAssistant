@@ -23,7 +23,8 @@ public class AdminSaveActionListener implements ActionListener {
 		System.out.println("sis: "+(model.getSignInSheet() == null));
 		System.out.println("students: "+(model.getSignInSheet().getSignInSheet() == null));
 		Student[] students = model.getSignInSheet().getSignInSheet();
-		controller.saveSignInSheet(students);
+		Integer[] parallelClasses = model.getSignInSheet().getParrallelHours();
+		controller.saveSignInSheet(students, parallelClasses);
 	}
 
 }

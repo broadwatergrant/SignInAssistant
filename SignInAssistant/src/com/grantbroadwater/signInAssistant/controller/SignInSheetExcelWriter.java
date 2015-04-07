@@ -20,6 +20,7 @@ public class SignInSheetExcelWriter {
 
 	private File outputFile;
 	private Student[] students;
+	private Integer[] parallelClasses;
 	
 	public SignInSheetExcelWriter() {
 		
@@ -37,6 +38,14 @@ public class SignInSheetExcelWriter {
 		this.students = students;
 	}
 	
+	public Integer[] getParallelClasses() {
+		return parallelClasses;
+	}
+
+	public void setParallelClasses(Integer[] parallelClasses) {
+		this.parallelClasses = parallelClasses;
+	}
+
 	public void write(File outputFile){
 		setOutputFile(outputFile);
 		write();
@@ -63,6 +72,20 @@ public class SignInSheetExcelWriter {
 		write();
 	}
 	
+	public void write(File outputFile, Student[] students, Integer[] parallelClasses){
+		setOutputFile(outputFile);
+		setStudents(students);
+		setParallelClasses(parallelClasses);
+		write();
+	}
+	
+	public void write(String fileName, Student[] students, Integer[] parallelClasses){
+		setOutputFile(fileName);
+		setStudents(students);
+		setParallelClasses(parallelClasses);
+		write();
+	}
+	
 	public boolean write(){
 		if(outputFile == null || students == null || students.length == 0)
 			return false;
@@ -82,6 +105,7 @@ public class SignInSheetExcelWriter {
 			titleRow.createCell(4).setCellValue("Time In");
 			titleRow.createCell(5).setCellValue("Time Out");
 			titleRow.createCell(6).setCellValue("Auto Signed Out");
+			titleRow.createCell(7).setCellValue("Hour");
 			
 			for(short r=0; r<students.length; r++){
 				Row row = signInSheet.createRow(r + 1);
@@ -94,24 +118,35 @@ public class SignInSheetExcelWriter {
 				row.createCell(4).setCellValue(formatTime(s.getTimeIn()));
 				row.createCell(5).setCellValue(formatTime(s.getTimeOut()));
 				row.createCell(6).setCellValue(s.isAutoSignedOut());
+				row.createCell(7).setCellValue(parallelClasses[r]);
 				
 			}
 			
 			/* ----- Stat Sheet ----- */
 			Sheet statSheet = wb.createSheet("Stats");
+			int rowCount = 0;
 			
-			Row totalCount = statSheet.createRow(0);
+			Row totalCount = statSheet.createRow(rowCount++);
 			totalCount.createCell(0).setCellValue("Total Count:");
 			totalCount.createCell(1).setCellValue(students.length);
 			
 			Integer[] gradeLevels = getDifferentGradeLevels();
 			
 			for(int gl=0; gl<gradeLevels.length; gl++){
-				Row row = statSheet.createRow(gl + 1);
+				Row row = statSheet.createRow(rowCount++);
 				
 				row.createCell(0).setCellValue("Grade " + gradeLevels[gl] + " count:");
 				row.createCell(1).setCellValue(getGradeLevelCount(gradeLevels[gl]));
 				
+			}
+			
+			Integer[] hours = getDifferentHours();
+			
+			for(int cl=0; cl<hours.length; cl++){
+				Row row = statSheet.createRow(rowCount++);
+				
+				row.createCell(0).setCellValue("Hour " + hours[cl] + " count:");
+				row.createCell(1).setCellValue(getHourCount(hours[cl]));
 			}
 			
 			System.out.println(outputFile.getAbsolutePath());
@@ -163,6 +198,27 @@ public class SignInSheetExcelWriter {
 		
 		for(Student s : students)
 			if(s.getGradeLevel() == gradeLevel)
+				count++;
+		
+		return count;
+	}
+	
+	private Integer[] getDifferentHours(){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		for(int i=0; i<parallelClasses.length; i++){
+			if(!containsValue(result, parallelClasses[i]))
+				result.add(parallelClasses[i]);
+		}
+		
+		return result.toArray(new Integer[result.size()]);
+	}
+	
+	private int getHourCount(int hour){
+		int count = 0;
+		
+		for(Integer i : parallelClasses)
+			if(i == hour)
 				count++;
 		
 		return count;

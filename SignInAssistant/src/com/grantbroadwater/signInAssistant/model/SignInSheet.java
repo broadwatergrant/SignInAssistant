@@ -8,10 +8,15 @@ import com.grantbroadwater.school.Student;
 
 public class SignInSheet {
 
-	private ArrayList<Student> list;
+	private Model model;
 	
-	public SignInSheet() {
+	private ArrayList<Student> list;
+	private ArrayList<Integer> classList;
+	
+	public SignInSheet(Model model) {
 		list = new ArrayList<Student>();
+		classList = new ArrayList<Integer>();
+		this.model = model;
 	}
 	
 	private void signStudentIn(Student s){
@@ -26,6 +31,8 @@ public class SignInSheet {
 		listStudent.setAutoSignedOut(false);
 		listStudent.setStatus(Status.IN);
 		list.add(listStudent);
+		
+		classList.add(model.getCurrentHour());
 	}
 	
 	private void signStudentOut(Student s){
@@ -65,6 +72,10 @@ public class SignInSheet {
 	
 	public Student[] getSignInSheet(){
 		return list.toArray(new Student[list.size()]);
+	}
+	
+	public Integer[] getParrallelHours(){
+		return classList.toArray(new Integer[classList.size()]);
 	}
 
 }

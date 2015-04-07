@@ -149,8 +149,8 @@ public class Controller {
 		scheduleWatcher = new ScheduleWatcher(model, this);
 	}
 	
-	protected void saveSignInSheet(Student[] students){
-		new SignInSheetSave(students);
+	protected void saveSignInSheet(Student[] students, Integer[] parallelClasses){
+		new SignInSheetSave(students, parallelClasses);
 	}
 	
 	protected void reselectPin(){
