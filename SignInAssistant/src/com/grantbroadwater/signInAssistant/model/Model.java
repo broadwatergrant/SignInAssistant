@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -15,6 +17,7 @@ import javax.swing.JOptionPane;
 import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.Administrators;
 import com.grantbroadwater.school.BellSchedule;
+import com.grantbroadwater.school.ClassPeriod;
 import com.grantbroadwater.school.Student;
 import com.grantbroadwater.school.Students;
 import com.grantbroadwater.util.Log;
@@ -342,6 +345,41 @@ public class Model {
 	
 	public boolean studentIsValid(String pin){
 		return studentBody.containsKey(pin);
+	}
+	
+	public int getCurrentHour(){
+		GregorianCalendar now = new GregorianCalendar();
+		
+		if (selectedSchedule.get(0).getStart().compareTo(now) > 0){
+			return 0;
+		}
+		
+		for(int i=0; i<selectedSchedule.size(); i++){
+			ClassPeriod cp = selectedSchedule.get(0);
+			if(now.compareTo(cp.getStop()) < 0)
+				return i + 1;
+		}
+		
+		return selectedSchedule.size() + 1;
+		
+	}
+	
+	public int compare(GregorianCalendar arg0, GregorianCalendar arg1){
+		if(arg0.get(Calendar.HOUR_OF_DAY) > arg1.get(Calendar.HOUR_OF_DAY)){
+			return 1;
+		}else if(arg0.get(Calendar.HOUR_OF_DAY) == arg1.get(Calendar.HOUR_OF_DAY)){
+			if(arg0.get(Calendar.MINUTE) > arg1.get(Calendar.MINUTE)){
+				return 1;
+			}else if(arg0.get(Calendar.MINUTE) == arg1.get(Calendar.MINUTE)){
+				return 0;
+			}else if(arg0.get(Calendar.MINUTE) < arg1.get(Calendar.MINUTE)){
+				return -1;
+			}
+			return 0;
+		}else if(arg0.get(Calendar.HOUR_OF_DAY) < arg1.get(Calendar.HOUR_OF_DAY)){
+			return -1;
+		}
+		return 0;
 	}
 	
 }

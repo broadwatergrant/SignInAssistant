@@ -2,7 +2,7 @@ package com.grantbroadwater.signInAssistant.model;
 
 import org.junit.Test;
 
-import com.grantbroadwater.school.Student;
+import com.grantbroadwater.school.BellSchedule;
 
 public class ModelTest {
 
@@ -41,13 +41,15 @@ public class ModelTest {
 //	}
 	
 	@Test
-	public void testStudentMatchingCriteria(){
+	public void testCurrentHour(){
 		model = new Model();
 		model.loadData();
-		Student[] students = model.getStudentsMatchingCriteria("", "Sarah", "");
-		for(Student s : students){
-			System.out.println(s);
-		}
+		
+		BellSchedule schedule = model.getScheduleWithName("A Day");
+		model.setSelectedSchedule(schedule);
+		int result = model.getCurrentHour();
+		
+		System.out.println(result);
 	}
 
 }
