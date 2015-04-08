@@ -26,20 +26,14 @@ public class SIAFrameTest {
 		
 		try {
 			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (InterruptedException e) {}
 		
 		frame.showPanel(1);
 		frame.setSize(400, 400);
 		
 		try {
 			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (InterruptedException e) {}
 		
 		
 	}

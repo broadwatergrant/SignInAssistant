@@ -19,8 +19,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
+import com.grantbroadwater.util.Log;
 
 public class InquirePanel extends GPanel {
 
@@ -35,15 +35,15 @@ public class InquirePanel extends GPanel {
 	private InquireResultsTableModel resultsTableModel;
 	private JTable resultsTable;
 	private StudentHistoryTableModel historyTableModel;
-	
+
 	private JPanel entryPanel, mainPanel;
-	
+
 	public InquirePanel() {
 		super(new BorderLayout());
-		
+
 		entryPanel = createEntryPanel();
 		mainPanel = createMainPanel();
-		
+
 		add(entryPanel, BorderLayout.NORTH);
 		add(mainPanel, BorderLayout.CENTER);
 	}
@@ -52,7 +52,7 @@ public class InquirePanel extends GPanel {
 	public Dimension getPreferredSize() {
 		return new Dimension(WIDTH, HEIGHT);
 	}
-	
+
 	private JPanel createEntryPanel() {
 		JPanel housingPanel = new JPanel();
 		housingPanel.setLayout(new BoxLayout(housingPanel, BoxLayout.Y_AXIS));
@@ -98,12 +98,12 @@ public class InquirePanel extends GPanel {
 
 		return housingPanel;
 	}
-	
-	private JPanel createMainPanel(){
+
+	private JPanel createMainPanel() {
 		JPanel housingPanel = new JPanel();
 		housingPanel.setLayout(new BorderLayout());
 		housingPanel.setBackground(Color.WHITE);
-		
+
 		// Results Panel
 		JPanel resultsPanel = new JPanel(new BorderLayout());
 		JPanel lblStudentPanel = new JPanel();
@@ -112,12 +112,13 @@ public class InquirePanel extends GPanel {
 		resultsPanel.add(lblStudentPanel, BorderLayout.NORTH);
 		resultsTableModel = new InquireResultsTableModel();
 		resultsTable = new JTable(resultsTableModel);
-		resultsTable.setPreferredScrollableViewportSize(new Dimension(200, 200));
+		resultsTable
+				.setPreferredScrollableViewportSize(new Dimension(200, 200));
 		resultsTable.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(resultsTable);
 		resultsPanel.add(scrollPane, BorderLayout.CENTER);
 		housingPanel.add(resultsPanel, BorderLayout.WEST);
-		
+
 		// Specific Panel
 		JPanel specificPanel = new JPanel(new BorderLayout());
 		specificPanel.setBackground(Color.WHITE);
@@ -126,76 +127,97 @@ public class InquirePanel extends GPanel {
 		lblStatus = new JLabel("Student is in/out of the library");
 		lblPanel.add(lblStatus);
 		specificPanel.add(lblPanel, BorderLayout.NORTH);
-		historyTableModel = new StudentHistoryTableModel(); /* ---\/--- History Table ---\/--- */
+		historyTableModel = new StudentHistoryTableModel(); /*
+															 * ---\/--- History
+															 * Table ---\/---
+															 */
 		JTable historyTable = new JTable(historyTableModel);
 		historyTable.setFillsViewportHeight(true);
 		JScrollPane historyScrollPane = new JScrollPane(historyTable);
 		specificPanel.add(historyScrollPane, BorderLayout.CENTER);
 		housingPanel.add(specificPanel, BorderLayout.CENTER);
-		
+
 		return housingPanel;
 	}
-	
-	public String getPin(){
+
+	public String getPin() {
 		return tfPin.getText();
 	}
-	
-	public String getFirstName(){
+
+	public String getFirstName() {
 		return tfFirst.getText();
 	}
-	
-	public String getLastName(){
+
+	public String getLastName() {
 		return tfLast.getText();
 	}
-	
-	public void setStatusLabelText(String text){
+
+	public void setStatusLabelText(String text) {
 		lblStatus.setText(text);
 	}
-	
-	public void setStatusLabelColor(Color color){
+
+	public void setStatusLabelColor(Color color) {
 		lblStatus.setForeground(color);
 	}
 
-	public void setStatusLabelView(String text, Color color){
+	public void setStatusLabelView(String text, Color color) {
 		setStatusLabelText(text);
 		setStatusLabelColor(color);
 	}
-	
-	public Student getSelectedStudent(){
+
+	public Student getSelectedStudent() {
 		int rowIndex = resultsTable.getSelectedRow();
-		if(rowIndex != -1)
+		if (rowIndex != -1)
 			return resultsTableModel.getStudentAt(rowIndex);
 		else
 			return null;
 	}
-	
-	public void setResultsFromInquiry(ArrayList<Student> students){
+
+	public void setResultsFromInquiry(ArrayList<Student> students) {
 		resultsTableModel.setResults(students);
 	}
-	
-	public void addInquirePanelDocumentListener(DocumentListener listener){
+
+	public StudentHistoryTableModel getStudentHistoryTableModel() {
+		return this.historyTableModel;
+	}
+
+	public void addSingleHistoryEntry(Student s) {
+		historyTableModel.addSingleHistoryEntry(s.getTimeIn(), s.getTimeOut(),
+				s.isAutoSignedOut());
+	}
+
+	public void addSingleEntry(String arg0, String arg1, Boolean arg2) {
+		historyTableModel.addSingleHistoryEntry(arg0, arg1, arg2);
+	}
+
+	public void clearHistoryTable() {
+		historyTableModel.clearTable();
+	}
+
+	public void addInquirePanelDocumentListener(DocumentListener listener) {
 		tfPin.getDocument().addDocumentListener(listener);
 		tfFirst.getDocument().addDocumentListener(listener);
 		tfLast.getDocument().addDocumentListener(listener);
 	}
-	
-	public void addInquirePanelListSelectionListener(ListSelectionListener listener){
+
+	public void addInquirePanelListSelectionListener(
+			ListSelectionListener listener) {
 		resultsTable.getSelectionModel().addListSelectionListener(listener);
 	}
-	
+
 }
 
-class InquireResultsTableModel extends AbstractTableModel{
+class InquireResultsTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
-	private String[] columnNames = {"Student"};
+	private String[] columnNames = { "Student" };
 	private ArrayList<Student> data;
-	
+
 	public InquireResultsTableModel() {
 		data = new ArrayList<Student>();
 	}
-	
+
 	@Override
 	public int getRowCount() {
 		return data.size();
@@ -208,47 +230,48 @@ class InquireResultsTableModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return data.get(rowIndex).getName() + " (" + data.get(rowIndex).getPin() + ")";
+		return data.get(rowIndex).getName() + " ("
+				+ data.get(rowIndex).getPin() + ")";
 	}
-	
+
 	@Override
-	public String getColumnName(int columnIndex){
+	public String getColumnName(int columnIndex) {
 		return columnNames[columnIndex];
 	}
-	
+
 	@Override
-	public Class<?> getColumnClass(int columnIndex){
+	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
 	}
-	
+
 	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex){
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
-	
-	public void setResults(ArrayList<Student> results){
+
+	public void setResults(ArrayList<Student> results) {
 		data.clear();
 		data.addAll(results);
 		fireTableDataChanged();
 	}
-	
-	public Student getStudentAt(int rowIndex){
+
+	public Student getStudentAt(int rowIndex) {
 		return data.get(rowIndex);
 	}
-	
+
 }
 
-class StudentHistoryTableModel extends AbstractTableModel{
-	
+class StudentHistoryTableModel extends AbstractTableModel {
+
 	private static final long serialVersionUID = 1L;
 
-	private String[] columnNames = {"Time In", "Time Out", "Auto Signed Out"};
+	private String[] columnNames = { "Time In", "Time Out", "Auto Signed Out" };
 	private ArrayList<ArrayList<Object>> data;
-	
+
 	public StudentHistoryTableModel() {
 		data = new ArrayList<ArrayList<Object>>();
 	}
-	
+
 	@Override
 	public int getRowCount() {
 		return data.size();
@@ -261,47 +284,68 @@ class StudentHistoryTableModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return data.get(rowIndex).get(columnIndex);
+		try {
+			if (rowIndex >= data.size() || columnIndex > data.get(0).size()) {
+				return null;
+			}
+			return data.get(rowIndex).get(columnIndex);
+		} catch (Exception e) {
+			new Log(Log.LogType.ERROR, "Exception caught");
+			return null;
+		}
 	}
-	
+
 	@Override
-	public String getColumnName(int columnIndex){
+	public String getColumnName(int columnIndex) {
 		return columnNames[columnIndex];
 	}
-	
+
 	@Override
-	public Class<?> getColumnClass(int columnIndex){
+	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
 	}
-	
+
 	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex){
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
-	
-	public void addSingleHistoryEntry(GregorianCalendar timeIn, GregorianCalendar timeOut, Status status){
+
+	public void addSingleHistoryEntry(GregorianCalendar timeIn,
+			GregorianCalendar timeOut, Boolean autoSignedOut) {
+		addSingleHistoryEntry(formatTime(timeIn), formatTime(timeOut),
+				autoSignedOut);
+	}
+
+	public void addSingleHistoryEntry(String arg0, String arg1, Boolean arg2) {
 		ArrayList<Object> newEntry = new ArrayList<Object>();
-		
-		newEntry.add(formatTime(timeIn));
-		newEntry.add(formatTime(timeOut));
-		newEntry.add(status);
-		
+
+		newEntry.add(arg0);
+		newEntry.add(arg1);
+		newEntry.add(arg2);
+
 		data.add(newEntry);
 		fireTableRowsInserted(data.size() - 1, data.size());
 	}
-	
-	public void setEntireHistory(ArrayList<ArrayList<Object>> history){
+
+	public void setEntireHistory(ArrayList<ArrayList<Object>> history) {
 		data.clear();
 		fireTableDataChanged();
-		
-		for(ArrayList<Object> singleEntry : history){
-			addSingleHistoryEntry((GregorianCalendar)singleEntry.get(0),
-					(GregorianCalendar)singleEntry.get(1),
-					(Status)singleEntry.get(2));
+
+		for (ArrayList<Object> singleEntry : history) {
+			addSingleHistoryEntry((GregorianCalendar) singleEntry.get(0),
+					(GregorianCalendar) singleEntry.get(1),
+					(Boolean) singleEntry.get(2));
 		}
 	}
-	
-	private String formatTime(GregorianCalendar gc){
+
+	public void clearTable() {
+		data.clear();
+		fireTableDataChanged();
+	}
+
+	private String formatTime(GregorianCalendar gc) {
+		if (gc == null)
+			return "";
 		return gc.get(Calendar.HOUR_OF_DAY) + ":" + gc.get(Calendar.MINUTE);
 	}
 }

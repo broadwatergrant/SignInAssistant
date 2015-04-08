@@ -25,9 +25,7 @@ public class SignInSheetTableTest implements ActionListener{
 	static JTextField tfFirst, tfLast;
 	static SignInSheetTable table;
 	
-	public SignInSheetTableTest() {
-		// TODO Auto-generated constructor stub
-	}
+	public SignInSheetTableTest() {}
 	
 	private static JPanel createContentPanel(){
 		JPanel panel = new JPanel(new GridLayout(1, 0));
