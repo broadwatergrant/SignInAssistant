@@ -53,6 +53,8 @@ public abstract class Person {
 	}
 
 	public String capitalize(String str){
+		if(str == null || str.length() == 0)
+			return "";
 		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
 	}
 	

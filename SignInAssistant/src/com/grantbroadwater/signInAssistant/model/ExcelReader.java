@@ -77,9 +77,15 @@ public class ExcelReader {
 				Row row = rows.next();
 				
 				Iterator<Cell> cells = row.cellIterator();
+				int cellCount = 0;
 				while(cells.hasNext()){
 					Cell cell = cells.next();
+					while(cellCount != cell.getColumnIndex()){
+						result.add("");
+						cellCount++;
+					}
 					result.add(this.readCell(cell));
+					cellCount++;
 				}
 			}
 			
@@ -156,6 +162,8 @@ public class ExcelReader {
 	}
 	
 	public String capitalize(String str){
+		if(str == null || str.length() == 0)
+			return "";
 		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
 	}
 	

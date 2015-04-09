@@ -56,13 +56,19 @@ public class StudentExcelReader extends ExcelReader {
 				contents.clear();
 				
 				Iterator<Cell> cells = row.cellIterator();
+				int cellCount = 0;
 				while(cells.hasNext()){
 					Cell cell = cells.next();
 					
 					if(row.getRowNum() == 0){
 						format.add(cell.getStringCellValue());
 					}else{
+						while(cellCount != cell.getColumnIndex()){
+							contents.add("");
+							cellCount++;
+						}
 						contents.add(readCell(cell));
+						cellCount++;
 					}
 					
 				}
