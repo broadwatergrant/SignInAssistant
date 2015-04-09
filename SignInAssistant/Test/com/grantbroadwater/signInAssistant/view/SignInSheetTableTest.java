@@ -59,8 +59,6 @@ public class SignInSheetTableTest implements ActionListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = table.getSelectedRow();
-				model.deleteRow(rowIndex);
 			}
 		});
 		

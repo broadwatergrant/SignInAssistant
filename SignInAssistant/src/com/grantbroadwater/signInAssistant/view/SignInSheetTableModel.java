@@ -89,9 +89,10 @@ public class SignInSheetTableModel extends AbstractTableModel {
 		return -1;
 	}
 	
-	public void deleteRow(int rowIndex){
-		data.remove(rowIndex);
-		fireTableRowsDeleted(rowIndex - 1, rowIndex);
+	public void clear(){
+		data.clear();
+		studentList.clear();
+		fireTableDataChanged();
 	}
 	
 	private String formatTime(GregorianCalendar gc){

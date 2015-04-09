@@ -16,16 +16,16 @@ public class SignInSheetTable extends JTable{
 		this.setFillsViewportHeight(true);
 	}
 
+	public void clear(){
+		model.clear();
+	}
+	
 	public void signStudentIn(Student student) {
 		model.signStudentIn(student);
 	}
 
 	public void signStudentOut(Student student){
 		model.signStudentOut(student);
-	}
-	
-	public void deleteRow(int rowIndex) {
-		model.deleteRow(rowIndex);
 	}
 	
 }

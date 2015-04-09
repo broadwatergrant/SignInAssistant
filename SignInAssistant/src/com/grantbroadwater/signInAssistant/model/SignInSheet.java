@@ -77,5 +77,10 @@ public class SignInSheet {
 	public Integer[] getParrallelHours(){
 		return classList.toArray(new Integer[classList.size()]);
 	}
+	
+	public void clear(){
+		list.clear();
+		classList.clear();
+	}
 
 }

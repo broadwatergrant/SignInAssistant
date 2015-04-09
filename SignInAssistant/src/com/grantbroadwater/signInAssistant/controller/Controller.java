@@ -128,7 +128,9 @@ public class Controller {
 	protected void adminClickedStartStop(){
 		AdministratorPanel administratorPanel = view.getAdministratorPanel();
 		if(!view.getStudentFrame().isVisible()){
-			// TODO: Clear sign in sheet / ask for save
+			this.promptUserForSave();
+			administratorPanel.clearSignInSheet();
+			model.getSignInSheet().clear();
 			administratorPanel.setScheduleComboBoxEnabled(false);
 			this.startStudentSignIn(model.getScheduleWithName(administratorPanel.getSelectedScheduleName()));	
 		}else{
@@ -176,11 +178,16 @@ public class Controller {
 	}
 	
 	protected void userRequestingToClose(){
-		if(view.getSiaFrame().getJMenuBar() == null)
+		if(view.getSiaFrame().getJMenuBar() == null) 
 			return;
+		
 		int promptResult = view.getSiaFrame().promptUserBeforeClose();
 		if(promptResult == 0)
 			closeApplication();
+	}
+	
+	protected void promptUserForSave(){
+		
 	}
 	
 	protected void closeApplication(){

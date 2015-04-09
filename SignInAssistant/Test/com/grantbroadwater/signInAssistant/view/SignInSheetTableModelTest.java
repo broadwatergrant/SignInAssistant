@@ -100,8 +100,6 @@ public class SignInSheetTableModelTest {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = table.getSelectedRow();
-				model.deleteRow(rowIndex);
 			}
 		});
 

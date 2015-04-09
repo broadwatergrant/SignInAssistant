@@ -140,4 +140,7 @@ public class AdministratorPanel extends GPanel {
 		btnStart.setText(text);
 	}
 	
+	public void clearSignInSheet(){
+		signInSheet.clear();
+	}
 }
