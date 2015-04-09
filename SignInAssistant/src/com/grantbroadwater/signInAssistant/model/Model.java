@@ -189,7 +189,6 @@ public class Model {
 		}
 	}
 
-	// TODO: Make private
 	protected Student determineWhichStudentToSave(Student s1, Student s2) {
 		if (s1.essentialyEquals(s2))
 			return s1; // Both are same person, just duplicate entry

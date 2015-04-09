@@ -122,6 +122,7 @@ public class Controller {
 	protected void adminClickedStartStop(){
 		AdministratorPanel administratorPanel = view.getAdministratorPanel();
 		if(!view.getStudentFrame().isVisible()){
+			// TODO: Clear sign in sheet / ask for save
 			administratorPanel.setScheduleComboBoxEnabled(false);
 			this.startStudentSignIn(model.getScheduleWithName(administratorPanel.getSelectedScheduleName()));	
 		}else{

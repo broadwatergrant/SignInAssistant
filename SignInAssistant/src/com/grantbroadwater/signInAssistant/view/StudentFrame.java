@@ -11,7 +11,7 @@ public class StudentFrame extends JFrame {
 		super("Sign In Assistant");
 		studentPanel = new StudentPanel();
 		this.setContentPane(studentPanel);
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // TODO: Better Closing Procedure
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); 
 		this.setMinimumSize(studentPanel.getPreferredSize());
 		this.setMaximumSize(studentPanel.getPreferredSize());
 	}
