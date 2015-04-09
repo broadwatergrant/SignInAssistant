@@ -2,8 +2,10 @@ package com.grantbroadwater.signInAssistant.view;
 
 import java.awt.CardLayout;
 import java.awt.HeadlessException;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class SIAFrame extends JFrame {
@@ -21,13 +23,14 @@ public class SIAFrame extends JFrame {
 	
 	public SIAFrame(){
 		super("Sign In Assistant");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		cardLayout = new CardLayout();
 		contentPane = new JPanel(cardLayout);
 		this.getContentPane().add(contentPane);
 		
 		siaMenuBar = new SIAMenuBar();
+		
 	}
 	
 	public SIAFrame(JPanel[] panels, String[] panelNames) throws HeadlessException {
@@ -73,5 +76,22 @@ public class SIAFrame extends JFrame {
 			setJMenuBar(siaMenuBar);
 		else
 			setJMenuBar(null);
+	}
+	
+	public void setSIAFrameWindowAdapter(WindowAdapter windowAdapter){
+		this.addWindowListener(windowAdapter);
+	}
+	
+	public int promptUserBeforeClose(){
+		String[] buttonText = {"Close", "Dont Close"};
+		int promptResult = JOptionPane.showOptionDialog(this, 
+				"Are you sure you want to exit Sign In Assistant",
+				"Sign In Assistant", 
+				JOptionPane.DEFAULT_OPTION,
+				JOptionPane.WARNING_MESSAGE, 
+				null,
+				buttonText,
+				buttonText[1]);
+		return promptResult;
 	}
 }

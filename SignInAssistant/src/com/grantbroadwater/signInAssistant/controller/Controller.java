@@ -17,26 +17,28 @@ public class Controller {
 	Model model;
 	View view;
 	
-	AdminSaveActionListener adminSaveActionListern;
-	AdminSignInListener adminSignInListener;
-	AdminStartSignInListener adminStartSignInListener;
-	DataDocumentListener dataDocumentListener;
-	InquireDocumentListener inquireDocumentListener;
-	InquireListSelectionListener inquireListSelectionListener;
-	StudentPinDocumentListener studentPinDocumnetListener;
-	StudentSignInActionListener studentSignInActionListener;
+	private AdminSaveActionListener adminSaveActionListern;
+	private AdminSignInListener adminSignInListener;
+	private AdminStartSignInListener adminStartSignInListener;
+	private DataDocumentListener dataDocumentListener;
+	private InquireDocumentListener inquireDocumentListener;
+	private InquireListSelectionListener inquireListSelectionListener;
+	private StudentPinDocumentListener studentPinDocumnetListener;
+	private StudentSignInActionListener studentSignInActionListener;
 	
-	SignInMenuBarListener signInMenuBarListener;
-	SignOutMenuBarListener signOutMenuBarListener;
-	ReselectPinMenuBarListener reselectPinMenuBarListener;
-	CloseMenuBarListener closeMenuBarListener;
-	InquireMenuBarListener inquireMenuBarListener;
-	SignInSheetMenuBarListener signInSheetMenuBarListener;
-	DataMenuBarListener dataMenuBarListener;
+	private SignInMenuBarListener signInMenuBarListener;
+	private SignOutMenuBarListener signOutMenuBarListener;
+	private ReselectPinMenuBarListener reselectPinMenuBarListener;
+	private CloseMenuBarListener closeMenuBarListener;
+	private InquireMenuBarListener inquireMenuBarListener;
+	private SignInSheetMenuBarListener signInSheetMenuBarListener;
+	private DataMenuBarListener dataMenuBarListener;
 	
-	SIAKeyListener siaKeyListener;
+	private SIAKeyListener siaKeyListener;
 	
-	ScheduleWatcher scheduleWatcher;
+	private ScheduleWatcher scheduleWatcher;
+	private SIAWindowAdapter siaWindowAdapter;
+	
 	
 	public Controller(){
 		
@@ -71,6 +73,10 @@ public class Controller {
 		view.getAdministratorPanel().addKeyListener(siaKeyListener);
 		
 		scheduleWatcher = new ScheduleWatcher(model, this);
+		
+		siaWindowAdapter = new SIAWindowAdapter(this);
+		view.getSiaFrame().setSIAFrameWindowAdapter(siaWindowAdapter);
+		
 		
 		/* ----- Menu Bar Listeners ----- */
 		
@@ -169,8 +175,16 @@ public class Controller {
 		view.getAdministratorPanel().updateSignInSheet(s);
 	}
 	
+	protected void userRequestingToClose(){
+		if(view.getSiaFrame().getJMenuBar() == null)
+			return;
+		int promptResult = view.getSiaFrame().promptUserBeforeClose();
+		if(promptResult == 0)
+			closeApplication();
+	}
+	
 	protected void closeApplication(){
-		
+		System.exit(0);
 	}
 	
 }

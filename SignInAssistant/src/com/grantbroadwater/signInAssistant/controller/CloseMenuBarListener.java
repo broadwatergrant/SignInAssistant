@@ -13,7 +13,7 @@ public class CloseMenuBarListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		controller.closeApplication();
+		controller.userRequestingToClose();
 	}
 
 }
