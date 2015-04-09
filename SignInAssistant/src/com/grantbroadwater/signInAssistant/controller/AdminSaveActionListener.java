@@ -19,9 +19,6 @@ public class AdminSaveActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("model: "+(model == null));
-		System.out.println("sis: "+(model.getSignInSheet() == null));
-		System.out.println("students: "+(model.getSignInSheet().getSignInSheet() == null));
 		Student[] students = model.getSignInSheet().getSignInSheet();
 		Integer[] parallelClasses = model.getSignInSheet().getParrallelHours();
 		controller.saveSignInSheet(students, parallelClasses);

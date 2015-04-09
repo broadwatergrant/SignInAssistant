@@ -94,4 +94,17 @@ public class SIAFrame extends JFrame {
 				buttonText[1]);
 		return promptResult;
 	}
+	
+	public int promptUserForSave(){
+		String[] buttonText = {"Save", "Dont Save"};
+		int promptResult = JOptionPane.showOptionDialog(this,
+				"There is unsaved information in the sign in sheet." 
+				+"\nWould you like to save now?",
+				"Sign In Assistant",
+				JOptionPane.DEFAULT_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null, buttonText,
+				buttonText[0]);
+		return promptResult;
+	}
 }

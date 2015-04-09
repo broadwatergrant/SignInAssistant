@@ -123,12 +123,14 @@ public class Controller {
 	protected void punchStudent(Student student){
 		model.getSignInSheet().punchStudent(student);
 		view.getAdministratorPanel().updateSignInSheet(student);
+		model.markInformationSavedAs(false);
 	}
 	
 	protected void adminClickedStartStop(){
 		AdministratorPanel administratorPanel = view.getAdministratorPanel();
 		if(!view.getStudentFrame().isVisible()){
-			this.promptUserForSave();
+			if(!this.promptUserForSave())
+				return;
 			administratorPanel.clearSignInSheet();
 			model.getSignInSheet().clear();
 			administratorPanel.setScheduleComboBoxEnabled(false);
@@ -140,6 +142,7 @@ public class Controller {
 	}
 	
 	protected void startStudentSignIn(BellSchedule schedule){
+		model.resetStudentBody();
 		view.setStudentFrameVisible(true);
 		view.getSIAMenuBar().setStartStopSignInText("Stop Sign In");
 		view.getAdministratorPanel().setStartStopButtonText("Stop");
@@ -160,6 +163,7 @@ public class Controller {
 	
 	protected void saveSignInSheet(Student[] students, Integer[] parallelClasses){
 		new SignInSheetSave(students, parallelClasses);
+		model.markInformationSavedAs(true);
 	}
 	
 	protected void reselectPin(){
@@ -180,14 +184,33 @@ public class Controller {
 	protected void userRequestingToClose(){
 		if(view.getSiaFrame().getJMenuBar() == null) 
 			return;
-		
-		int promptResult = view.getSiaFrame().promptUserBeforeClose();
-		if(promptResult == 0)
-			closeApplication();
+		if(promptUserForSave())
+			System.exit(0);
 	}
 	
-	protected void promptUserForSave(){
+	protected boolean promptUserForSave(){
+		if(model.allInformationSaved())
+			return true;
 		
+		boolean result;
+		
+		int promptResult = view.getSiaFrame().promptUserForSave();
+		if(promptResult == 0){ // Save
+			Student[] students = model.getSignInSheet().getSignInSheet();
+			Integer[] parallelClasses = model.getSignInSheet().getParrallelHours();
+			this.saveSignInSheet(students, parallelClasses);
+			result = true;
+		}else if(promptResult == 1){ // Don't Save
+			result = true;
+		}else if(promptResult == -1){ // Abort
+			result = false;
+		}else{
+			result = false;
+		}
+		
+		if(result)
+			model.markInformationSavedAs(true);
+		return result;
 	}
 	
 	protected void closeApplication(){

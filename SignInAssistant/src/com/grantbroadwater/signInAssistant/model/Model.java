@@ -18,6 +18,7 @@ import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.Administrators;
 import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.ClassPeriod;
+import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
 import com.grantbroadwater.school.Students;
 import com.grantbroadwater.util.Log;
@@ -42,6 +43,7 @@ public class Model {
 		studentBody = new Students();
 		administration = new Administrators();
 		signInSheet = new SignInSheet(this);
+		this.markInformationSavedAs(true);
 	}
 
 	public BellSchedule getSelectedSchedule() {
@@ -117,6 +119,10 @@ public class Model {
 
 	private String readFile(File f) {
 		try {
+			if(!f.exists()){
+				f.createNewFile();
+				return null;
+			}
 			FileInputStream input = new FileInputStream(f);
 			String result = "";
 
@@ -379,6 +385,31 @@ public class Model {
 			return -1;
 		}
 		return 0;
+	}
+	
+	public boolean allInformationSaved(){
+		String result = readFile(new File(REF + "dataIsSaved.value"));
+		if(result == null)
+			return false;
+		try {
+			return Boolean.parseBoolean(result);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public void markInformationSavedAs(boolean value){
+		save(new File(REF + "dataIsSaved.value"), Boolean.toString(value));
+	}
+	
+	public void resetStudentBody(){
+		for(String pin : studentBody.keySet()){
+			Student student = studentBody.get(pin);
+			student.setTimeIn(null);
+			student.setTimeOut(null);
+			student.setStatus(Status.OUT);
+			student.setAutoSignedOut(false);
+		}
 	}
 	
 }
