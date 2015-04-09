@@ -21,7 +21,7 @@ public class StudentSignInActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String pin = studentPanel.getPin();
+		String pin = zeroTrim(studentPanel.getPin());
 		if (pin.equals(""))
 			return;
 		if (model.studentIsValid(pin)) {
@@ -32,6 +32,15 @@ public class StudentSignInActionListener implements ActionListener {
 			studentPanel.notifyPinIsIncorrect();
 			studentPanel.clearPinText();
 		}
+	}
+	
+	public String zeroTrim(String str){
+		if(str == null || str.length() == 0)
+			return "";
+		if(str.charAt(0) != '0')
+			return str;
+		else
+			return zeroTrim(str.substring(1));
 	}
 
 }

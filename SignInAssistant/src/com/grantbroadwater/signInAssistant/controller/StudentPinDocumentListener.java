@@ -31,7 +31,7 @@ public class StudentPinDocumentListener implements DocumentListener {
 	}
 
 	private void determinePinValidity(){
-		String pin = studentPanel.getPin();
+		String pin = zeroTrim(studentPanel.getPin());
 		if(model.studentIsValid(pin)){
 			Student s = model.getStudentBody().get(pin);
 			String status = (s.getStatus() == Status.IN) ? "out" : "in";
@@ -45,6 +45,15 @@ public class StudentPinDocumentListener implements DocumentListener {
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 		new Log(LogType.INFO, "ChangedUpdate Event fired");
+	}
+	
+	public String zeroTrim(String str){
+		if(str == null || str.length() == 0)
+			return "";
+		if(str.charAt(0) != '0')
+			return str;
+		else
+			return zeroTrim(str.substring(1));
 	}
 
 }
