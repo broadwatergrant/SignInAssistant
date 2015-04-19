@@ -5,9 +5,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,17 +29,38 @@ public class DataPanel extends GPanel {
 
 	private JTextField tfPin, tfFirst, tfLast;
 	private ResultsTableModel studentResultsModel, adminResultsModel;
+	private JButton btnChangeExcelFileLocation;
+	private JLabel lblExcelFilePath;
 
 	public DataPanel() {
 		super(new BorderLayout());
 		setBackground(Color.WHITE);
-		add(createEntryPanel(), BorderLayout.NORTH);
+
+		JPanel headerPanel = new JPanel(new BorderLayout());
+		headerPanel.setBackground(Color.WHITE);
+		headerPanel.add(createHeaderPanel(), BorderLayout.NORTH);
+		headerPanel.add(createEntryPanel(), BorderLayout.CENTER);
+
+		add(headerPanel, BorderLayout.NORTH);
 		add(createBodyPanel(), BorderLayout.CENTER);
 	}
 
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(WIDTH, HEIGHT);
+	}
+
+	private JPanel createHeaderPanel() {
+		JPanel housingPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		housingPanel.setBackground(Color.WHITE);
+
+		btnChangeExcelFileLocation = new JButton("Change Excel File");
+		housingPanel.add(btnChangeExcelFileLocation);
+
+		lblExcelFilePath = new JLabel("Path");
+		housingPanel.add(lblExcelFilePath);
+
+		return housingPanel;
 	}
 
 	private JPanel createEntryPanel() {
@@ -152,6 +175,14 @@ public class DataPanel extends GPanel {
 		tfPin.getDocument().addDocumentListener(listener);
 		tfFirst.getDocument().addDocumentListener(listener);
 		tfLast.getDocument().addDocumentListener(listener);
+	}
+
+	public void addExcelFileChangedActionListener(ActionListener listener) {
+		btnChangeExcelFileLocation.addActionListener(listener);
+	}
+
+	public void changeExcelFilePathText(String text) {
+		lblExcelFilePath.setText(text);
 	}
 
 }
