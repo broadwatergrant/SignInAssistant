@@ -58,6 +58,7 @@ public class DataPanel extends GPanel {
 		housingPanel.add(btnChangeExcelFileLocation);
 
 		lblExcelFilePath = new JLabel("Path");
+		lblExcelFilePath.setToolTipText("Path");
 		housingPanel.add(lblExcelFilePath);
 
 		return housingPanel;
@@ -181,8 +182,9 @@ public class DataPanel extends GPanel {
 		btnChangeExcelFileLocation.addActionListener(listener);
 	}
 
-	public void changeExcelFilePathText(String text) {
+	public void changeExcelFilePathText(String text, String toolTipText) {
 		lblExcelFilePath.setText(text);
+		lblExcelFilePath.setToolTipText(toolTipText);
 	}
 
 }

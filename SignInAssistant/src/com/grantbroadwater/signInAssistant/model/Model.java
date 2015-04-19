@@ -61,6 +61,15 @@ public class Model {
 		return null;
 	}
 	
+	public String getExcelFileLocation(){
+		return readFile(excelFileLocation);
+	}
+	
+	public String getExcelFileName(){
+		File f = new File(readFile(excelFileLocation));
+		return f.getName();
+	}
+	
 	public void loadData() {
 		loadReferenceData();
 		loadApplicationData();
@@ -147,7 +156,7 @@ public class Model {
 		}
 	}
 
-	private File getExcelFileLocationFromUser() {
+	public File getExcelFileLocationFromUser() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.addChoosableFileFilter(new ExcelFileFilter());
 		fileChooser.setAcceptAllFileFilterUsed(false);

@@ -32,6 +32,7 @@ public class Controller {
 	private InquireListSelectionListener inquireListSelectionListener;
 	private StudentPinDocumentListener studentPinDocumnetListener;
 	private StudentSignInActionListener studentSignInActionListener;
+	private ExcelFileChangedActionListener excelFileChangedActionListener;
 	
 	private SignInMenuBarListener signInMenuBarListener;
 	private SignOutMenuBarListener signOutMenuBarListener;
@@ -65,6 +66,7 @@ public class Controller {
 		inquireListSelectionListener = new InquireListSelectionListener(model, view.getInquirePanel());
 		studentPinDocumnetListener = new StudentPinDocumentListener(model, view.getStudentPanel());
 		studentSignInActionListener = new StudentSignInActionListener(model, view.getStudentPanel(), this);
+		excelFileChangedActionListener = new ExcelFileChangedActionListener(this, view.getDataPanel(), model);
 		
 		view.addSaveActionListener(adminSaveActionListern);
 		view.addSignInActionListener(adminSignInListener);
@@ -74,6 +76,7 @@ public class Controller {
 		view.addInquirePanelListSelectionListener(inquireListSelectionListener);
 		view.addStudentPanelDocumentListener(studentPinDocumnetListener);
 		view.addStudentPanelConfirmListener(studentSignInActionListener);
+		view.getDataPanel().addExcelFileChangedActionListener(excelFileChangedActionListener);
 		
 		siaKeyListener = new SIAKeyListener(this);
 		view.getSiaFrame().addKeyListener(siaKeyListener);
@@ -220,6 +223,31 @@ public class Controller {
 		return result;
 	}
 	
+	protected boolean promptUserForSave(String customMessage){
+		if(model.allInformationSaved())
+			return true;
+		
+		boolean result;
+		
+		int promptResult = view.getSiaFrame().promptUserForSave(customMessage);
+		if(promptResult == 0){ // Save
+			Student[] students = model.getSignInSheet().getSignInSheet();
+			Integer[] parallelClasses = model.getSignInSheet().getParrallelHours();
+			this.saveSignInSheet(students, parallelClasses);
+			result = true;
+		}else if(promptResult == 1){ // Don't Save
+			result = true;
+		}else if(promptResult == -1){ // Abort
+			result = false;
+		}else{
+			result = false;
+		}
+		
+		if(result)
+			model.markInformationSavedAs(true);
+		return result;
+	}
+	
 	protected void closeApplication(){
 		System.exit(0);
 	}
@@ -241,6 +269,8 @@ public class Controller {
 			command.add(javaBin);
 			command.add("-jar");
 			command.add(currentJar.getPath());
+			
+			new Log(Log.LogType.WARN, "Now restarting application");
 			
 			final ProcessBuilder builder = new ProcessBuilder(command);
 			builder.start();
