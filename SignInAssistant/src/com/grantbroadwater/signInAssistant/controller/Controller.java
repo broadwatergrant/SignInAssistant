@@ -109,7 +109,7 @@ public class Controller {
 	}
 	
 	public void startApplication(){
-		view.showPanel(view.getAdministratorSignInPanel().getCardLayoutName());
+		view.getSiaFrame().showFirstPanel(view.getAdministratorSignInPanel().getCardLayoutName());
 		view.setSIAFrameVisible(true);
 	}
 	

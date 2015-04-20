@@ -1,12 +1,17 @@
 package com.grantbroadwater.signInAssistant.view;
 
 import java.awt.CardLayout;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
+import java.awt.Point;
 import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.grantbroadwater.util.Log;
 
 public class SIAFrame extends JFrame {
 
@@ -31,6 +36,25 @@ public class SIAFrame extends JFrame {
 		
 		siaMenuBar = new SIAMenuBar();
 		
+		centerFrame();
+		
+	}
+	
+	public void centerFrame(){
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice[] gd = ge.getScreenDevices();
+		
+		if(gd.length >= 0){
+			setLocation(getCenterOf(gd[0]));
+		}else{
+			new Log(Log.LogType.ERROR, "No Screens found");
+		}
+	}
+	
+	public Point getCenterOf(GraphicsDevice screen){
+		int x = screen.getDefaultConfiguration().getBounds().x + screen.getDefaultConfiguration().getBounds().width / 2 - this.getWidth() / 2;
+		int y = screen.getDefaultConfiguration().getBounds().height / 2 - this.getHeight() / 2;
+		return new Point(x, y);
 	}
 	
 	public SIAFrame(JPanel[] panels, String[] panelNames) throws HeadlessException {
@@ -57,6 +81,18 @@ public class SIAFrame extends JFrame {
 		this.setMaximumSize(newPanel.getPreferredSize());
 		
 		cardLayout.show(contentPane, panelName);
+		
+		//centerFrame();
+	}
+	
+	public void showFirstPanel(String panelName){
+		JPanel newPanel = panels[getIndexOf(panelName)];
+		this.setMinimumSize(newPanel.getPreferredSize());
+		this.setMaximumSize(newPanel.getPreferredSize());
+		
+		cardLayout.show(contentPane, panelName);
+		
+		centerFrame();
 	}
 	
 	private int getIndexOf(String name){
