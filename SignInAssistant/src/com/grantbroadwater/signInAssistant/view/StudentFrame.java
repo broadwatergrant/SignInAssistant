@@ -33,7 +33,7 @@ public class StudentFrame extends JFrame {
 	}
 	
 	public Point getCenterOf(GraphicsDevice screen){
-		int x = screen.getDefaultConfiguration().getBounds().width / 2 - this.getWidth() / 2;
+		int x = screen.getDefaultConfiguration().getBounds().x + screen.getDefaultConfiguration().getBounds().width / 2 - this.getWidth() / 2;
 		int y = screen.getDefaultConfiguration().getBounds().height / 2 - this.getHeight() / 2;
 		return new Point(x, y);
 	}
