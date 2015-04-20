@@ -118,6 +118,10 @@ public class SIAFrame extends JFrame {
 		this.addWindowListener(windowAdapter);
 	}
 	
+	public void displayMessage(String message){
+		JOptionPane.showMessageDialog(this, message);
+	}
+	
 	public int promptUserBeforeClose(){
 		String[] buttonText = {"Close", "Dont Close"};
 		int promptResult = JOptionPane.showOptionDialog(this, 

@@ -1,10 +1,5 @@
 package com.grantbroadwater.signInAssistant.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,12 +7,10 @@ import com.grantbroadwater.school.Administrator;
 import com.grantbroadwater.school.BellSchedule;
 import com.grantbroadwater.school.Status;
 import com.grantbroadwater.school.Student;
-import com.grantbroadwater.signInAssistant.SignInAssistant;
 import com.grantbroadwater.signInAssistant.model.Model;
 import com.grantbroadwater.signInAssistant.view.AdministratorPanel;
 import com.grantbroadwater.signInAssistant.view.SIAMenuBar;
 import com.grantbroadwater.signInAssistant.view.View;
-import com.grantbroadwater.util.Log;
 
 public class Controller {
 
@@ -257,36 +250,39 @@ public class Controller {
 			return;
 		}
 		
+		view.getSiaFrame().displayMessage("The program needs to restart."
+				+ "\nAfter the application closes, re-open the application");
 		
-		try {
-			final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-			final File currentJar = new File(SignInAssistant.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			
-			if(!currentJar.getName().endsWith(".jar"))
-				return;
-			
-			final ArrayList<String> command = new ArrayList<String>();
-			command.add(javaBin);
-			command.add("-jar");
-			command.add(currentJar.getPath());
-			
-			new Log(Log.LogType.WARN, "Now restarting application");
-			
-			final ProcessBuilder builder = new ProcessBuilder(command);
-			builder.start();
-			closeApplication();
-			
-		} catch (URISyntaxException e) {
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			new Log(Log.LogType.ERROR, sw.toString());
-		} catch (IOException e) {
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			new Log(Log.LogType.ERROR, sw.toString());
-		}
+		closeApplication();
+		
+//		try {
+//			final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+//			final File currentJar = new File(SignInAssistant.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+//			
+//			if(!currentJar.getName().endsWith(".jar"))
+//				return;
+//			
+//			final ArrayList<String> command = new ArrayList<String>();
+//			command.add(javaBin);
+//			command.add("-jar");
+//			command.add(currentJar.getPath());
+//			
+//			final ProcessBuilder builder = new ProcessBuilder(command);
+//			builder.start();
+//			
+//			closeApplication();
+//			
+//		} catch (URISyntaxException e) {
+//			StringWriter sw = new StringWriter();
+//			PrintWriter pw = new PrintWriter(sw);
+//			e.printStackTrace(pw);
+//			new Log(Log.LogType.ERROR, sw.toString());
+//		} catch (IOException e) {
+//			StringWriter sw = new StringWriter();
+//			PrintWriter pw = new PrintWriter(sw);
+//			e.printStackTrace(pw);
+//			new Log(Log.LogType.ERROR, sw.toString());
+//		}
 		
 		
 	}
