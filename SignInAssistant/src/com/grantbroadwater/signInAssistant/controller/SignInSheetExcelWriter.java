@@ -168,10 +168,15 @@ public class SignInSheetExcelWriter {
 	}
 	
 	private String formatTime(GregorianCalendar gc){
-		if(gc == null)
+		if(gc == null){
 			return "NA";
-		else
-			return gc.get(Calendar.HOUR_OF_DAY) + ":" + gc.get(Calendar.MINUTE);
+		}else{
+			int min = gc.get(Calendar.MINUTE);
+			String strMin = (min < 10) ? "0" + min : "" + min;
+			int hour = gc.get(Calendar.HOUR_OF_DAY);
+			hour = (hour > 12) ? hour - 12 : hour;
+			return hour + ":" + strMin;
+		}
 	}
 	
 	private Integer[] getDifferentGradeLevels(){
