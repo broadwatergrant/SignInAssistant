@@ -142,7 +142,7 @@ public class AdministratorSignInPanel extends GPanel {
 	}
 
 	public String getName() {
-		return tfName.getText();
+		return tfName.getText().trim();
 	}
 
 	public String getPin() {

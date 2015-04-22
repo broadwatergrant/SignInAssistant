@@ -123,7 +123,7 @@ public class ExcelReader {
 				result = new Double(d);
 			break;
 		case Cell.CELL_TYPE_STRING:
-			result = cell.getStringCellValue();
+			result = cell.getStringCellValue().trim();
 			break;
 		default:
 			break;
