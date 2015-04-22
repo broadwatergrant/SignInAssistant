@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AdministratorSignInPanel extends GPanel {
@@ -24,7 +25,8 @@ public class AdministratorSignInPanel extends GPanel {
 	private BorderLayout borderLayout;
 	private BoxLayout boxLayout;
 	private JPanel leftPanel, mainPanel;
-	private JTextField tfName, tfPin;
+	private JTextField tfName;
+	private JPasswordField tfPin;
 	private JButton btnSignIn;
 
 	public AdministratorSignInPanel() {
@@ -92,7 +94,7 @@ public class AdministratorSignInPanel extends GPanel {
 		});
 		mainPanel.add(makePanel(new JLabel("Name: "), tfName));
 
-		tfPin = new JTextField();
+		tfPin = new JPasswordField();
 		mainPanel.add(makePanel(new JLabel("Pin: "), tfPin));
 
 		btnSignIn = new JButton("Sign In");
@@ -134,17 +136,17 @@ public class AdministratorSignInPanel extends GPanel {
 		btnSignIn.addActionListener(listener);
 	}
 
-	public void clearTextFields(){
+	public void clearTextFields() {
 		tfName.setText("");
 		tfPin.setText("");
 	}
-	
+
 	public String getName() {
 		return tfName.getText();
 	}
 
 	public String getPin() {
-		return tfPin.getText();
+		return new String(tfPin.getPassword());
 	}
 
 	public void displayMessageBox(String message) {

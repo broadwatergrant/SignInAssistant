@@ -40,7 +40,6 @@ public class Controller {
 	private ScheduleWatcher scheduleWatcher;
 	private SIAWindowAdapter siaWindowAdapter;
 	
-	
 	public Controller(){
 		
 	}
