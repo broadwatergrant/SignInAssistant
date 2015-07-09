@@ -14,7 +14,8 @@ public class SignInAssistant {
 	
 	public static void main(String[] args) {
 		try{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel"/*UIManager.getSystemLookAndFeelClassName()*/);
+			System.out.println(UIManager.getSystemLookAndFeelClassName());
 		}catch(Exception e){}
 		
 		controller = new Controller();
