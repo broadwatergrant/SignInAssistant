@@ -171,7 +171,7 @@ public class Model {
 			} else {
 				result = null;
 			}
-
+			
 			if (ExcelFileFilter.getExtension(result) == null)
 				// TODO: accept more extensions
 				result = new File(result.getAbsolutePath() + ".xlsx");
